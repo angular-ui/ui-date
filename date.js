@@ -6,7 +6,7 @@
  @param [ui-date] {object} Options to pass to $.fn.datepicker() merged onto ui.config
  */
 
-angular.module('ui.date')
+angular.module('ui.date', [])
 
 .constant('uiDateConfig', {})
 
