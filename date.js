@@ -6,20 +6,22 @@
  @param [ui-date] {object} Options to pass to $.fn.datepicker() merged onto ui.config
  */
 
-angular.module('ui.directives')
+angular.module('ui.date')
 
-.directive('uiDate', ['ui.config', function (uiConfig) {
+.constant('uiDateConfig', {})
+
+.directive('uiDate', ['uiDateConfig', function (uiDateConfig) {
   'use strict';
   var options;
   options = {};
-  if (angular.isObject(uiConfig.date)) {
-    angular.extend(options, uiConfig.date);
+  if (angular.isObject(uiDateConfig.date)) {
+    angular.extend(options, uiDateConfig.date);
   }
   return {
     require:'?ngModel',
     link:function (scope, element, attrs, controller) {
       var getOptions = function () {
-        return angular.extend({}, uiConfig.date, scope.$eval(attrs.uiDate));
+        return angular.extend({}, uiDateConfig.date, scope.$eval(attrs.uiDate));
       };
       var initDateWidget = function () {
         var opts = getOptions();
@@ -75,11 +77,11 @@ angular.module('ui.directives')
 }
 ])
 
-.directive('uiDateFormat', ['ui.config', function(uiConfig) {
+.directive('uiDateFormat', ['ui.config', function(uiDateConfig) {
   var directive = {
     require:'ngModel',
     link: function(scope, element, attrs, modelCtrl) {
-      var dateFormat = attrs.uiDateFormat || uiConfig.dateFormat;
+      var dateFormat = attrs.uiDateFormat || uiDateConfig.dateFormat;
       if ( dateFormat ) {
         // Use the datepicker with the attribute value as the dateFormat string to convert to and from a string
         modelCtrl.$formatters.push(function(value) {
