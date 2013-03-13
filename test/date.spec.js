@@ -109,7 +109,6 @@ describe('uiDate', function() {
     }));
 
     it('should not stop following elements from linking', function () {
-      dump(element);
       expect(element.find('span').text()).toEqual('12');
     });
 
