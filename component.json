@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "main": "./ui-date.js",
   "ignore": [
-    ".*",
+    "**/.*",
+    "node_modules",
+    "components",
     "test*",
     "demo*"
   ],
