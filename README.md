@@ -1,4 +1,4 @@
-# ui-date directive
+# ui-date directive ![Build Status](https://travis-ci.org/angular-ui/ui-date.png)
 
 This directive allows you to add a date-picker to your form elements.
 
