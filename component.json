@@ -1,7 +1,7 @@
 {
-  "name": "ui-date",
+  "name": "angular-ui-date",
   "version": "0.0.1",
-  "main": "./date.js",
+  "main": "./ui-date.js",
   "ignore": [],
   "dependencies": {
     "angular": "~1.x",
