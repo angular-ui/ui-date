@@ -6,6 +6,7 @@
   "dependencies": {
     "angular": "~1.x",
     "jquery": ">= 1.6",
-    "jquery-ui": ">= 1.9"
+    "jquery-ui": ">= 1.9",
+    "angular-module": "latest"
   }
 }

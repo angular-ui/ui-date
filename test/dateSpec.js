@@ -6,7 +6,7 @@ describe('uiDate', function() {
     element.datepicker('setDate', date);
     $.datepicker._selectDate(element);
   };
-  beforeEach(module('ui.directives'));
+  beforeEach(module('ui.date'));
   describe('simple use on input element', function() {
     it('should have a date picker attached', function() {
       inject(function($compile, $rootScope) {
@@ -250,7 +250,7 @@ describe('uiDate', function() {
 });
 
 describe('uiDateFormat', function() {
-  beforeEach(module('ui.directives'));
+  beforeEach(module('ui.date'));
 
   describe('$formatting', function() {
     it('should parse the date correctly from an ISO string', function() {
@@ -345,14 +345,15 @@ describe('uiDateFormat', function() {
     });
   });
 
-  describe('with uiConfig', function() {
+  describe('with uiDateConfig', function() {
     var element, scope, config;
     var format = 'DD, d MM, yy';
     var aDate = new Date(2012,9,11);
     var aDateString = "Thursday, 11 October, 2012";
     var aISODateString = aDate.toISOString();
-    beforeEach(inject(['$compile', '$rootScope', 'ui.config', function($compile, $rootScope, uiConfig) {
-      config = uiConfig;
+    beforeEach(inject(['$compile', '$rootScope', 'uiDateConfig', 'uiDateFormatConfig', function($compile, $rootScope, uiDateConfig, uiDateFormatConfig) {
+      config = uiDateConfig;
+      formatConfig = uiDateFormatConfig;
       element = $compile('<input ui-date-format ng-model="x"/>')($rootScope);
       scope = $rootScope;
     }]));
@@ -363,7 +364,7 @@ describe('uiDateFormat', function() {
       expect(element.controller('ngModel').$viewValue).toEqual(aDate);
     });
     it('use format value if config given', function() {
-      config.dateFormat = format;
+      formatConfig = format;
       scope.x = aDateString;
       scope.$digest();
       expect(element.controller('ngModel').$viewValue).toEqual(aDate);

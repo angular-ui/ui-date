@@ -3,7 +3,7 @@
  jQuery UI Datepicker plugin wrapper
 
  @note If ≤ IE8 make sure you have a polyfill for Date.toISOString()
- @param [ui-date] {object} Options to pass to $.fn.datepicker() merged onto ui.config
+ @param [ui-date] {object} Options to pass to $.fn.datepicker() merged onto uiDateConfig
  */
 
 angular.module('ui.date', [])
@@ -14,14 +14,12 @@ angular.module('ui.date', [])
   'use strict';
   var options;
   options = {};
-  if (angular.isObject(uiDateConfig.date)) {
-    angular.extend(options, uiDateConfig.date);
-  }
+  angular.extend(options, uiDateConfig);
   return {
     require:'?ngModel',
     link:function (scope, element, attrs, controller) {
       var getOptions = function () {
-        return angular.extend({}, uiDateConfig.date, scope.$eval(attrs.uiDate));
+        return angular.extend({}, uiDateConfig, scope.$eval(attrs.uiDate));
       };
       var initDateWidget = function () {
         var opts = getOptions();
@@ -77,11 +75,13 @@ angular.module('ui.date', [])
 }
 ])
 
-.directive('uiDateFormat', ['ui.config', function(uiDateConfig) {
+.constant('uiDateFormatConfig', '')
+
+.directive('uiDateFormat', ['uiDateFormatConfig', function(uiDateFormatConfig) {
   var directive = {
     require:'ngModel',
     link: function(scope, element, attrs, modelCtrl) {
-      var dateFormat = attrs.uiDateFormat || uiDateConfig.dateFormat;
+      var dateFormat = attrs.uiDateFormat || uiDateFormatConfig;
       if ( dateFormat ) {
         // Use the datepicker with the attribute value as the dateFormat string to convert to and from a string
         modelCtrl.$formatters.push(function(value) {
