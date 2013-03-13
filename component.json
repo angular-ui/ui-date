@@ -2,7 +2,11 @@
   "name": "angular-ui-date",
   "version": "0.0.1",
   "main": "./ui-date.js",
-  "ignore": [],
+  "ignore": [
+    ".*",
+    "test*",
+    "demo*"
+  ],
   "dependencies": {
     "angular": "~1.x",
     "jquery": ">= 1.6",
