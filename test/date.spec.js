@@ -36,17 +36,17 @@ describe('uiDate', function() {
         expect($rootScope.x).toEqual(aDate);
       });
     });
-    it('should blur the input element after selecting a date', function() {
+    it('should hide the date picker after selecting a date', function() {
       inject(function($compile, $rootScope) {
         var aDate, element;
         aDate = new Date(2010, 12, 1);
-        element = $compile("<input ui-date ng-model='x'/>")($rootScope);
+        element = $compile("<input ui-date='{showAnim: false}' ng-model='x'/>")($rootScope);
         $rootScope.$apply();
         $(document.body).append(element); // Need to add it to the document so that it can get focus
         element.focus();
-        expect(document.activeElement).toEqual(element[0]);
+        expect(angular.element('#ui-datepicker-div').is(":visible")).toBeTruthy();
         selectDate(element, aDate);
-        expect(document.activeElement).not.toEqual(element[0]);
+        expect(angular.element('#ui-datepicker-div').is(":visible")).toBeFalsy();
         element.remove();  // And then remove it again!
       });
     });
@@ -91,8 +91,9 @@ describe('uiDate', function() {
           dateString = '2012-8-01';
           dateObj = $.datepicker.parseDate('yy-mm-dd', dateString);
           element.val(dateString);
-          element.trigger("change");
+          element.trigger("input");
           expect(element.datepicker('getDate')).toEqual(dateObj);
+          expect($rootScope.x).toEqual(dateObj);
           expect(element.val()).toEqual('2012-08-01');
           $rootScope.$digest();
           expect($rootScope.x).toEqual(dateObj);
@@ -122,7 +123,7 @@ describe('uiDate', function() {
         var watched = false;
         $rootScope.myDateSelected = function() {
           $rootScope.watchMe = true;
-        }
+        };
         $rootScope.$watch("watchMe", function(watchMe) {
           if (watchMe) {
             watched = true;

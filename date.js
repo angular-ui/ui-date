@@ -10,7 +10,7 @@ angular.module('ui.date', [])
 
 .constant('uiDateConfig', {})
 
-.directive('uiDate', ['uiDateConfig', function (uiDateConfig) {
+.directive('uiDate', ['uiDateConfig', '$timeout', function (uiDateConfig, $timeout) {
   'use strict';
   var options;
   options = {};
@@ -26,29 +26,37 @@ angular.module('ui.date', [])
 
         // If we have a controller (i.e. ngModelController) then wire it up
         if (controller) {
-          var updateModel = function () {
-            scope.$apply(function () {
-              var date = element.datepicker("getDate");
-              element.datepicker("setDate", element.val());
-              controller.$setViewValue(date);
+          // Override ngModelController's $setViewValue
+          // so that we can ensure that a Date object is being pass down the $parsers
+          // This is to handle the case where the user types directly into the input box
+          var _$setViewValue = controller.$setViewValue;
+          var settingValue = false;
+          controller.$setViewValue = function () {
+            if ( !settingValue ) {
+              settingValue = true;
+              element.datepicker("setDate", element.datepicker("getDate"));
+              _$setViewValue.call(controller, element.datepicker("getDate"));
+              $timeout(function() {settingValue = false;});
+            }
+          };
+
+          // Set the view value in a $apply block when users selects
+          // (calling directive user's function too if provided)
+          var _onSelect = opts.onSelect || angular.noop;
+          opts.onSelect = function (value, picker) {
+            scope.$apply(function() {
+              controller.$setViewValue(value);
+              _onSelect(value, picker);
               element.blur();
             });
           };
-          if (opts.onSelect) {
-            // Caller has specified onSelect, so call this as well as updating the model
-            var userHandler = opts.onSelect;
-            opts.onSelect = function (value, picker) {
-              updateModel();
-              scope.$apply(function() {
-                userHandler(value, picker);
-              });
-            };
-          } else {
-            // No onSelect already specified so just update the model
-            opts.onSelect = updateModel;
-          }
-          // In case the user changes the text directly in the input box
-          element.bind('change', updateModel);
+
+          // Don't show if we are already setting the value in $setViewValue()
+          // (calling directive user's function too if provided)
+          var _beforeShow = opts.beforeShow || angular.noop;
+          opts.beforeShow = function(input, inst) {
+            return !settingValue && _beforeShow(input, inst);
+          };
 
           // Update the date picker when the model changes
           controller.$render = function () {
