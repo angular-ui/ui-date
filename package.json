@@ -5,20 +5,16 @@
   "author": "https://github.com/angular-ui/ui-date/graphs/contributors",
   "license": "MIT",
   "homepage": "http://angular-ui.github.com",
-  "main": "./ui-date.js",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "components",
-    "test*",
-    "demo*"
-  ],
-  "dependencies": {
-    "angular": "~1.x",
-    "jquery": ">= 1.6",
-    "jquery-ui": ">= 1.9"
-  },
+  "main": "",
+  "dependencies": {},
   "devDependencies": {
-    "angular-mocks": "~1.x"
+    "grunt": "~0.4.1",
+    "grunt-testacular": "~0.3.0",
+    "grunt-contrib-jshint": "~0.2.0"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/angular-ui/ui-date.git"
   }
 }

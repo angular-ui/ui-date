@@ -1,3 +1,4 @@
+basePath = '..';
 files = [
   JASMINE,
   JASMINE_ADAPTER,
@@ -9,5 +10,4 @@ files = [
   'test/*.spec.js'
 ];
 singleRun = true;
-autoWatch = true;
 browsers = [ 'Chrome' ];
