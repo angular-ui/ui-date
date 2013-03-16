@@ -4,23 +4,37 @@ This directive allows you to add a date-picker to your form elements.
 
 # Requirements
 
+- AngularJS
 - JQuery
 - JQueryUI
 - [Date.toISOString()](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Date/toISOString) (requires [polyfill](https://github.com/kriskowal/es5-shim/) for &le;IE8)
 
 # Usage
 
-Load the script file in your application:
+We use [bower](http://twitter.github.com/bower/) for dependency management.  Add
 
-    <script type="text/javascript" src="angular-ui.js"></script>
+    dependencies: {
+        "angular-ui-date": "latest"
+    }
+
+To your `components.json` file. Then run
+
+    bower install
+
+This will copy the ui-date files into your `components` folder, along with its dependencies. Load the script files in your application:
+
+    <script type="text/javascript" src="components/jquery/jquery.js"></script>
+    <script type="text/javascript" src="components/jquery-ui\ui\jquery-ui.custom.js"></script>
+    <script type="text/javascript" src="components/angular/angular.js"></script>
+    <script type="text/javascript" src="components/angular-ui-date/date.js"></script>
 
 Add the date module as a dependency to your application module:
 
-    var myAppModule = angular.module('MyApp', ['ui.directives'])
+    var myAppModule = angular.module('MyApp', ['ui.date'])
 
 Apply the directive to your form elements:
 
-    <input ui-date name="DateOfBirth"></input>
+    <input ui-date>
 
 ## Options
 
@@ -34,7 +48,7 @@ All the jQueryUI DatePicker options can be passed through the directive.
 		};
 	});
 
-    <input ui-date="dateOptions" name="DateOfBirth"></input>
+    <input ui-date="dateOptions" name="DateOfBirth">
 
 ## Static Inline Picker
 
@@ -56,7 +70,7 @@ If you want to pass date strings to and from the date directive via ng-model the
 This directive specifies the format of the date string that will be expected in the ng-model.
 The format string syntax is that defined by the JQueryUI Date picker. For example
 
-    <input ui-date ui-date-format="DD, d MM, yy" ng-model="myDate"></input>
+    <input ui-date ui-date-format="DD, d MM, yy" ng-model="myDate">
 
 Now you can set myDate in the controller.
 
