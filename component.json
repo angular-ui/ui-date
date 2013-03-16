@@ -12,6 +12,8 @@
     "components",
     "test*",
     "demo*"
+    "gruntFile.js",
+    "package.json"
   ],
   "dependencies": {
     "angular": "~1.x",
