@@ -11,7 +11,7 @@
     "node_modules",
     "components",
     "test*",
-    "demo*"
+    "demo*",
     "gruntFile.js",
     "package.json"
   ],
