@@ -62,13 +62,13 @@ describe('uiDate', function() {
       scope.$apply(function() {
         scope.x = null;
       });
-      expect(element.datepicker('getDate')).toBe(null);
+      expect(element.datepicker('getDate')).toBeNull();
     });
     it('should not freak out when the model is undefined', function() {
       scope.$apply(function() {
         scope.x = undefined;
       });
-      expect(element.datepicker('getDate')).toBe(null);
+      expect(element.datepicker('getDate')).toBeNull();
     });
     it('should throw an error if you try to pass in a boolean when the model is false', function() {
       expect(function() {
@@ -327,6 +327,18 @@ describe('uiDateFormat', function() {
         expect(element.controller('ngModel').$viewValue).toEqual(aDate);
       });
     });
+
+    it('should convert empty strings to null', inject(function($compile, $rootScope) {
+      var element = $compile('<input ui-date-format ng-model="x">')($rootScope);
+      element.controller('ngModel').$setViewValue('');
+      $rootScope.$digest();
+      expect($rootScope.x).toBeNull();
+
+      element = $compile('<input ui-date-format="DD, d MM, yy" ng-model="x">')($rootScope);
+      element.controller('ngModel').$setViewValue('');
+      $rootScope.$digest();
+      expect($rootScope.x).toBeNull();
+    }));
 
     it('should format a selected date correctly to a custom string', function() {
       inject(function($compile, $rootScope) {

@@ -96,11 +96,13 @@ angular.module('ui.date', [])
           if (angular.isString(value) ) {
             return $.datepicker.parseDate(dateFormat, value);
           }
+          return null;
         });
         modelCtrl.$parsers.push(function(value){
           if (value) {
             return $.datepicker.formatDate(dateFormat, value);
           }
+          return null;
         });
       } else {
         // Default to ISO formatting
@@ -108,11 +110,13 @@ angular.module('ui.date', [])
           if (angular.isString(value) ) {
             return new Date(value);
           }
+          return null;
         });
         modelCtrl.$parsers.push(function(value){
           if (value) {
             return value.toISOString();
           }
+          return null;
         });
       }
     }
