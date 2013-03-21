@@ -6,7 +6,7 @@ files = [
   'components/jquery-ui/ui/jquery-ui.custom.js',
   'components/angular/angular.js',
   'components/angular-mocks/angular-mocks.js',
-  'date.js',
+  'src/date.js',
   'test/*.spec.js'
 ];
 singleRun = true;
