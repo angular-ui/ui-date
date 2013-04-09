@@ -11,14 +11,14 @@ This directive allows you to add a date-picker to your form elements.
 
 # Testing
 
-We use testacular and jshint to ensure the quality of the code.  The easiest way to run these checks is to use grunt:
+We use [karma](http://karma-runner.github.io/0.8/index.html) and jshint to ensure the quality of the code.  The easiest way to run these checks is to use grunt:
 
   npm install -g grunt-cli
   npm install
   bower install
   grunt
 
-The testacular task will try to open Chrome as a browser in which to run the tests.  Make sure this is available or change the configuration in `test\test.config.js` 
+The karma task will try to open Chrome as a browser in which to run the tests.  Make sure this is available or change the configuration in `test\test.config.js` 
 
 # Usage
 
