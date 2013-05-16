@@ -35,9 +35,9 @@ To your `components.json` file. Then run
 This will copy the ui-date files into your `components` folder, along with its dependencies. Load the script files in your application:
 
     <script type="text/javascript" src="components/jquery/jquery.js"></script>
-    <script type="text/javascript" src="components/jquery-ui\ui\jquery-ui.custom.js"></script>
+    <script type="text/javascript" src="components/jquery-ui/ui/jquery-ui.js"></script>
     <script type="text/javascript" src="components/angular/angular.js"></script>
-    <script type="text/javascript" src="components/angular-ui-date/date.js"></script>
+    <script type="text/javascript" src="components/angular-ui-date/src/date.js"></script>
 
 Add the date module as a dependency to your application module:
 
