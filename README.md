@@ -28,7 +28,7 @@ We use [bower](http://twitter.github.com/bower/) for dependency management.  Add
         "angular-ui-date": "latest"
     }
 
-To your `components.json` file. Then run
+To your `bower.json` file. Then run
 
     bower install
 
