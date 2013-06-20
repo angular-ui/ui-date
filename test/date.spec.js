@@ -87,14 +87,20 @@ describe('uiDate', function() {
           $rootScope.$apply(function() {
               $rootScope.x = dateObj;
           });
-          // Now change the data in the input box
-          dateString = '2012-8-01';
+
+          dateString = '2012-7-01';
           dateObj = $.datepicker.parseDate('yy-mm-dd', dateString);
+
+          // Now change the date in the input box
           element.val(dateString);
           element.trigger("input");
+          expect($rootScope.x).toEqual(element.val());
           expect(element.datepicker('getDate')).toEqual(dateObj);
-          expect($rootScope.x).toEqual(dateObj);
-          expect(element.val()).toEqual('2012-08-01');
+
+          // Now blur the input and expect the input to be re-formatted
+          // and the model to get converted to a Date object
+          element.trigger("blur");
+          expect(element.val()).toEqual('2012-07-01');
           $rootScope.$digest();
           expect($rootScope.x).toEqual(dateObj);
       });
