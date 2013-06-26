@@ -32,7 +32,13 @@ To your `bower.json` file. Then run
 
     bower install
 
-This will copy the ui-date files into your `components` folder, along with its dependencies. Load the script files in your application:
+This will copy the ui-date files into your `components` folder, along with its dependencies. 
+
+Add the css:
+
+    <link rel="stylesheet" href="components/jquery-ui/themes/smoothness/jquery-ui.css"/>
+
+Load the script files in your application:
 
     <script type="text/javascript" src="components/jquery/jquery.js"></script>
     <script type="text/javascript" src="components/jquery-ui/ui/jquery-ui.js"></script>
