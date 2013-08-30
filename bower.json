@@ -5,7 +5,7 @@
   "author": "https://github.com/angular-ui/ui-date/graphs/contributors",
   "license": "MIT",
   "homepage": "http://angular-ui.github.com/ui-date",
-  "main": "./ui-date.js",
+  "main": "./src/date.js",
   "ignore": [
     "**/.*",
     "node_modules",
