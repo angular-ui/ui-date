@@ -105,6 +105,16 @@ describe('uiDate', function() {
       });
   });
 
+  it('should preserve time', function() {
+    inject(function($compile, $rootScope) {
+      $rootScope.x = new Date(2012,9,12,15);
+      var element = $compile('<input ui-date ng-model="x"/>')($rootScope);
+      $rootScope.$apply();
+      selectDate(element, $rootScope.x);
+      expect($rootScope.x.getHours()).toBe(15);
+    });
+  });
+
   describe('jQuery widget', function() {
     var element;
 
