@@ -10,7 +10,7 @@ angular.module('ui.date', [])
 
 .constant('uiDateConfig', {})
 
-.directive('uiDate', ['uiDateConfig', '$timeout', function (uiDateConfig, $timeout) {
+.directive('uiDate', ['uiDateConfig', function (uiDateConfig) {
   'use strict';
   var options;
   options = {};
