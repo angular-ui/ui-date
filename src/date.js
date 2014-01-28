@@ -45,6 +45,13 @@ angular.module('ui.date', [])
           opts.onClose = function(value, picker) {
             showing = false;
           };
+          // this must be the first focus event added to ensure we can
+          // stop the event before it reaches the datepicker widget
+          element.on('focus', function(focusEvent) {
+            if ( attrs.readonly ) {
+              focusEvent.stopImmediatePropagation();
+            }
+          });
           element.on('blur', function() {
             if ( !showing ) {
               scope.$apply(function() {
