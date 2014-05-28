@@ -45,7 +45,7 @@ angular.module('ui.date', [])
           opts.onClose = function(value, picker) {
             showing = false;
           };
-          element.on('blur', function() {
+          element.off('blur.datepicker').on('blur.datepicker', function() {
             if ( !showing ) {
               scope.$apply(function() {
                 element.datepicker("setDate", element.datepicker("getDate"));
