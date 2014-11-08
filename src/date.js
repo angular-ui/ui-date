@@ -59,7 +59,7 @@ angular.module('ui.date', [])
             var date = controller.$modelValue;
             if ( angular.isDefined(date) && date !== null && !angular.isDate(date) ) {
                 if ( angular.isString(controller.$modelValue) ) {
-                    date = uiDateConverter.stringToDate(attrs.uiDateFormat, controller.$modelValue)
+                    date = uiDateConverter.stringToDate(attrs.uiDateFormat, controller.$modelValue);
                 } else {
                     throw new Error('ng-Model value must be a Date, or a String object with a date formatter - currently it is a ' + typeof date + ' - use ui-date-format to convert it from a string');
                 }
@@ -84,11 +84,6 @@ angular.module('ui.date', [])
 ])
 .service('uiDateConverter', ['uiDateFormatConfig', function(uiDateFormatConfig){
 
-    return {
-        stringToDate: stringToDate,
-        dateToString: dateToString
-    };
-
     function dateToString(dateFormat, value){
         if (value) {
             if ( dateFormat || uiDateFormatConfig) {
@@ -111,6 +106,12 @@ angular.module('ui.date', [])
         }
         return null;
     }
+
+    return {
+        stringToDate: stringToDate,
+        dateToString: dateToString
+    };
+
 }])
 .constant('uiDateFormatConfig', '')
 .directive('uiDateFormat', ['uiDateConverter', function(uiDateConverter) {
@@ -125,7 +126,7 @@ angular.module('ui.date', [])
         });
 
         modelCtrl.$parsers.push(function(value){
-            return uiDateConverter.dateToString(dateFormat, value)
+            return uiDateConverter.dateToString(dateFormat, value);
         });
 
     }
