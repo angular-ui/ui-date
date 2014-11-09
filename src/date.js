@@ -82,7 +82,7 @@ angular.module('ui.date', [])
   };
 }
 ])
-.service('uiDateConverter', ['uiDateFormatConfig', function(uiDateFormatConfig){
+.factory('uiDateConverter', ['uiDateFormatConfig', function(uiDateFormatConfig){
 
     function dateToString(dateFormat, value){
         if (value) {
