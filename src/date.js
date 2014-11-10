@@ -10,7 +10,7 @@ angular.module('ui.date', [])
 
 .constant('uiDateConfig', {})
 
-.directive('uiDate', ['uiDateConfig', function (uiDateConfig) {
+.directive('uiDate', ['uiDateConfig', 'uiDateConverter', function (uiDateConfig, uiDateConverter) {
   'use strict';
   var options;
   options = {};
@@ -36,7 +36,7 @@ angular.module('ui.date', [])
               showing = true;
               controller.$setViewValue(element.datepicker("getDate"));
               _onSelect(value, picker);
-              element.blur();
+              //element.blur();
             });
           };
           opts.beforeShow = function() {
@@ -56,9 +56,13 @@ angular.module('ui.date', [])
 
           // Update the date picker when the model changes
           controller.$render = function () {
-            var date = controller.$viewValue;
+            var date = controller.$modelValue;
             if ( angular.isDefined(date) && date !== null && !angular.isDate(date) ) {
-              throw new Error('ng-Model value must be a Date object - currently it is a ' + typeof date + ' - use ui-date-format to convert it from a string');
+                if ( angular.isString(controller.$modelValue) ) {
+                    date = uiDateConverter.stringToDate(attrs.uiDateFormat, controller.$modelValue);
+                } else {
+                    throw new Error('ng-Model value must be a Date, or a String object with a date formatter - currently it is a ' + typeof date + ' - use ui-date-format to convert it from a string');
+                }
             }
             element.datepicker("setDate", date);
           };
@@ -78,44 +82,55 @@ angular.module('ui.date', [])
   };
 }
 ])
+.factory('uiDateConverter', ['uiDateFormatConfig', function(uiDateFormatConfig){
 
+    function dateToString(dateFormat, value){
+        if (value) {
+            if ( dateFormat || uiDateFormatConfig) {
+                return jQuery.datepicker.formatDate(dateFormat, value);
+            }
+            return value.toISOString();
+        } else {
+            return null;
+        }
+    }
+
+    function stringToDate(dateFormat, value) {
+        if ( angular.isString(value) ) {
+            if ( dateFormat || uiDateFormatConfig) {
+                return jQuery.datepicker.parseDate(dateFormat, value);
+            }
+
+            var isoDate = new Date(value);
+            return isNaN(isoDate.getTime()) ? null : isoDate;
+        }
+        return null;
+    }
+
+    return {
+        stringToDate: stringToDate,
+        dateToString: dateToString
+    };
+
+}])
 .constant('uiDateFormatConfig', '')
-
-.directive('uiDateFormat', ['uiDateFormatConfig', function(uiDateFormatConfig) {
+.directive('uiDateFormat', ['uiDateConverter', function(uiDateConverter) {
   var directive = {
     require:'ngModel',
     link: function(scope, element, attrs, modelCtrl) {
-      var dateFormat = attrs.uiDateFormat || uiDateFormatConfig;
-      if ( dateFormat ) {
+        var dateFormat = attrs.uiDateFormat;
+
         // Use the datepicker with the attribute value as the dateFormat string to convert to and from a string
-        modelCtrl.$formatters.push(function(value) {
-          if (angular.isString(value) ) {
-            return jQuery.datepicker.parseDate(dateFormat, value);
-          }
-          return null;
+        modelCtrl.$formatters.unshift(function(value) {
+            return uiDateConverter.stringToDate(dateFormat, value);
         });
+
         modelCtrl.$parsers.push(function(value){
-          if (value) {
-            return jQuery.datepicker.formatDate(dateFormat, value);
-          }
-          return null;
+            return uiDateConverter.dateToString(dateFormat, value);
         });
-      } else {
-        // Default to ISO formatting
-        modelCtrl.$formatters.push(function(value) {
-          if (angular.isString(value) ) {
-            return new Date(value);
-          }
-          return null;
-        });
-        modelCtrl.$parsers.push(function(value){
-          if (value) {
-            return value.toISOString();
-          }
-          return null;
-        });
-      }
+
     }
   };
+
   return directive;
 }]);
