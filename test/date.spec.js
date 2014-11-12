@@ -1,4 +1,3 @@
-/*global describe, beforeEach, afterEach, it, inject, expect, module, dump, $*/
 describe('uiDate', function() {
   'use strict';
   var selectDate;
@@ -11,7 +10,7 @@ describe('uiDate', function() {
     it('should have a date picker attached', function() {
       inject(function($compile, $rootScope) {
         var element;
-        element = $compile("<input ui-date/>")($rootScope);
+        element = $compile('<input ui-date/>')($rootScope);
         expect(element.datepicker()).toBeDefined();
       });
     });
@@ -19,7 +18,7 @@ describe('uiDate', function() {
       inject(function($compile, $rootScope) {
         var aDate, element;
         aDate = new Date(2010, 12, 1);
-        element = $compile("<input ui-date ng-model='x'/>")($rootScope);
+        element = $compile('<input ui-date ng-model="x"/>')($rootScope);
         $rootScope.$apply(function() {
           $rootScope.x = aDate;
         });
@@ -30,7 +29,7 @@ describe('uiDate', function() {
       inject(function($compile, $rootScope) {
         var aDate, element;
         aDate = new Date(2010, 12, 1);
-        element = $compile("<input ui-date ng-model='x'/>")($rootScope);
+        element = $compile('<input ui-date ng-model="x"/>')($rootScope);
         $rootScope.$apply();
         selectDate(element, aDate);
         expect($rootScope.x).toEqual(aDate);
@@ -40,13 +39,13 @@ describe('uiDate', function() {
       inject(function($compile, $rootScope) {
         var aDate, element;
         aDate = new Date(2010, 12, 1);
-        element = $compile("<input ui-date='{showAnim: false}' ng-model='x'/>")($rootScope);
+        element = $compile('<input ui-date="{showAnim: false}" ng-model="x"/>')($rootScope);
         $rootScope.$apply();
         $(document.body).append(element); // Need to add it to the document so that it can get focus
         element.focus();
-        expect(angular.element('#ui-datepicker-div').is(":visible")).toBeTruthy();
+        expect(angular.element('#ui-datepicker-div').is(':visible')).toBeTruthy();
         selectDate(element, aDate);
-        expect(angular.element('#ui-datepicker-div').is(":visible")).toBeFalsy();
+        expect(angular.element('#ui-datepicker-div').is(':visible')).toBeFalsy();
         element.remove();  // And then remove it again!
       });
     });
@@ -93,13 +92,13 @@ describe('uiDate', function() {
 
           // Now change the date in the input box
           element.val(dateString);
-          element.trigger("input");
+          element.trigger('input');
           expect($rootScope.x).toEqual(element.val());
           expect(element.datepicker('getDate')).toEqual(dateObj);
 
           // Now blur the input and expect the input to be re-formatted
           // and the model to get converted to a Date object
-          element.trigger("blur");
+          element.trigger('blur');
           expect(element.val()).toEqual('2012-07-01');
           $rootScope.$digest();
           expect($rootScope.x).toEqual(dateObj);
@@ -123,14 +122,14 @@ describe('uiDate', function() {
       element.remove();
     });
   });
-  describe("use with user events", function() {
+  describe('use with user events', function() {
     it('should call the user onSelect event within a scope.$apply context', function() {
       inject(function($compile, $rootScope) {
         var watched = false;
         $rootScope.myDateSelected = function() {
           $rootScope.watchMe = true;
         };
-        $rootScope.$watch("watchMe", function(watchMe) {
+        $rootScope.$watch('watchMe', function(watchMe) {
           if (watchMe) {
             watched = true;
           }
@@ -150,7 +149,7 @@ describe('uiDate', function() {
         spyOn($rootScope, 'beforeShowFn');
         spyOn($.datepicker, '_findPos').andReturn([0,0]);
         aDate = new Date(2012,9,11);
-        element = $compile("<input ui-date='{beforeShow: beforeShowFn}' ng-model='x' />")($rootScope);
+        element = $compile('<input ui-date="{beforeShow: beforeShowFn}" ng-model="x" />')($rootScope);
         $rootScope.$apply();
 
         expect($rootScope.beforeShowFn).not.toHaveBeenCalled();
@@ -169,7 +168,7 @@ describe('uiDate', function() {
         spyOn($rootScope, 'onCloseFn');
         spyOn($.datepicker, '_findPos').andReturn([0,0]);
         aDate = new Date(2012,9,11);
-        element = $compile("<input ui-date='{onClose: onCloseFn}' ng-model='x' />")($rootScope);
+        element = $compile('<input ui-date="{onClose: onCloseFn}" ng-model="x" />')($rootScope);
         $rootScope.$apply();
 
         expect($rootScope.onCloseFn).not.toHaveBeenCalled();
@@ -188,7 +187,7 @@ describe('uiDate', function() {
       inject(function($compile, $rootScope) {
         var aDate, element;
         aDate = new Date(2010, 12, 1);
-        element = $compile("<input ui-date ng-model='x' ng-required='true' />")($rootScope);
+        element = $compile('<input ui-date ng-model="x" ng-required="true" />')($rootScope);
         $rootScope.$apply();
         expect(element.hasClass('ng-invalid')).toBeTruthy();
       });
@@ -197,7 +196,7 @@ describe('uiDate', function() {
       inject(function($compile, $rootScope) {
         var aDate, element;
         aDate = new Date(2010, 12, 1);
-        element = $compile("<input ui-date ng-model='x' ng-required='true' />")($rootScope);
+        element = $compile('<input ui-date ng-model="x" ng-required="true" />')($rootScope);
         $rootScope.$apply(function() {
           $rootScope.x = aDate;
         });
@@ -208,7 +207,7 @@ describe('uiDate', function() {
       inject(function($compile, $rootScope) {
         var aDate, element;
         aDate = new Date(2010, 12, 1);
-        element = $compile("<input ui-date ng-model='x' ng-required='true' />")($rootScope);
+        element = $compile('<input ui-date ng-model="x" ng-required="true" />')($rootScope);
         $rootScope.$apply();
         selectDate(element, aDate);
         expect(element.hasClass('ng-valid')).toBeTruthy();
@@ -219,7 +218,7 @@ describe('uiDate', function() {
     it('should have a date picker attached', function() {
       inject(function($compile, $rootScope) {
         var element;
-        element = $compile("<div ui-date></div>")($rootScope);
+        element = $compile('<div ui-date></div>')($rootScope);
         expect(element.datepicker()).toBeDefined();
       });
     });
@@ -227,7 +226,7 @@ describe('uiDate', function() {
       inject(function($compile, $rootScope) {
         var aDate, element;
         aDate = new Date(2010, 12, 1);
-        element = $compile("<div ui-date ng-model='x'></div>")($rootScope);
+        element = $compile('<div ui-date ng-model="x"></div>')($rootScope);
         $rootScope.$apply(function() {
           $rootScope.x = aDate;
         });
@@ -238,7 +237,7 @@ describe('uiDate', function() {
       inject(function($compile, $rootScope) {
         var aDate, element;
         aDate = new Date(2010, 12, 1);
-        element = $compile("<div ui-date ng-model='x'></div>")($rootScope);
+        element = $compile('<div ui-date ng-model="x"></div>')($rootScope);
         $rootScope.$apply();
         selectDate(element, aDate);
         expect($rootScope.x).toEqual(aDate);
@@ -248,7 +247,7 @@ describe('uiDate', function() {
   describe('use with ng-required directive', function() {
     it('should be invalid initially', function() {
       inject(function($compile, $rootScope) {
-        var element = $compile("<div ui-date ng-model='x' ng-required='true' ></div>")($rootScope);
+        var element = $compile('<div ui-date ng-model="x" ng-required="true" ></div>')($rootScope);
         $rootScope.$apply();
         expect(element.hasClass('ng-invalid')).toBeTruthy();
       });
@@ -257,7 +256,7 @@ describe('uiDate', function() {
       inject(function($compile, $rootScope) {
         var aDate, element;
         aDate = new Date(2010, 12, 1);
-        element = $compile("<div ui-date ng-model='x' ng-required='true' ></div>")($rootScope);
+        element = $compile('<div ui-date ng-model="x" ng-required="true" ></div>')($rootScope);
         $rootScope.$apply(function() {
           $rootScope.x = aDate;
         });
@@ -268,7 +267,7 @@ describe('uiDate', function() {
       inject(function($compile, $rootScope) {
         var aDate, element;
         aDate = new Date(2010, 12, 1);
-        element = $compile("<div ui-date ng-model='x' ng-required='true' ></div>")($rootScope);
+        element = $compile('<div ui-date ng-model="x" ng-required="true" ></div>')($rootScope);
         $rootScope.$apply();
         selectDate(element, aDate);
         expect(element.hasClass('ng-valid')).toBeTruthy();
@@ -282,13 +281,13 @@ describe('uiDate', function() {
         $rootScope.config = {
           minDate: 5
         };
-        element = $compile("<input ui-date='config' ng-model='x'/>")($rootScope);
+        element = $compile('<input ui-date="config" ng-model="x"/>')($rootScope);
         $rootScope.$apply();
-        expect(element.datepicker("option", "minDate")).toBe(5);
+        expect(element.datepicker('option', 'minDate')).toBe(5);
         $rootScope.$apply(function() {
           $rootScope.config.minDate = 10;
         });
-        expect(element.datepicker("option", "minDate")).toBe(10);
+        expect(element.datepicker('option', 'minDate')).toBe(10);
       });
     });
   });
@@ -317,7 +316,7 @@ describe('uiDateFormat', function() {
     it('should parse the date correctly from a custom string', function() {
       inject(function($compile, $rootScope) {
         var aDate = new Date(2012, 9, 11);
-        var aDateString = "Thursday, 11 October, 2012";
+        var aDateString = 'Thursday, 11 October, 2012';
 
         var element = $compile('<input ui-date-format="DD, d MM, yy" ng-model="x"/>')($rootScope);
         $rootScope.x = aDateString;
@@ -385,7 +384,7 @@ describe('uiDateFormat', function() {
       expect($rootScope.x).toBeNull();
     }));
 
-	it('should not freak out on invalid values', function() {
+    it('should not freak out on invalid values', function() {
       inject(function($compile, $rootScope) {
         var element = $compile('<input ui-date-format ng-model="x"/>')($rootScope);
         $rootScope.$digest();
@@ -398,7 +397,7 @@ describe('uiDateFormat', function() {
       inject(function($compile, $rootScope) {
         var format = 'DD, d MM, yy';
         var aDate = new Date(2012,9,11);
-        var aDateString = "Thursday, 11 October, 2012";
+        var aDateString = 'Thursday, 11 October, 2012';
         var element = $compile('<input ui-date-format="' + format + '" ng-model="x"/>')($rootScope);
         $rootScope.$digest();
 
@@ -450,7 +449,6 @@ describe('uiDateFormat', function() {
           scope.$digest();
           expect(element.controller('ngModel').$viewValue).toEqual(expectedDate);
       });
-
   });
 
 });

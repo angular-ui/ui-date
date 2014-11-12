@@ -34,7 +34,7 @@ angular.module('ui.date', [])
           opts.onSelect = function (value, picker) {
             scope.$apply(function() {
               showing = true;
-              controller.$setViewValue(element.datepicker("getDate"));
+              controller.$setViewValue(element.datepicker('getDate'));
               _onSelect(value, picker);
               //element.blur();
             });
@@ -54,8 +54,8 @@ angular.module('ui.date', [])
           element.off('blur.datepicker').on('blur.datepicker', function() {
             if ( !showing ) {
               scope.$apply(function() {
-                element.datepicker("setDate", element.datepicker("getDate"));
-                controller.$setViewValue(element.datepicker("getDate"));
+                element.datepicker('setDate', element.datepicker('getDate'));
+                controller.$setViewValue(element.datepicker('getDate'));
               });
             }
           });
@@ -70,7 +70,7 @@ angular.module('ui.date', [])
                     throw new Error('ng-Model value must be a Date, or a String object with a date formatter - currently it is a ' + typeof date + ' - use ui-date-format to convert it from a string');
                 }
             }
-            element.datepicker("setDate", date);
+            element.datepicker('setDate', date);
           };
         }
         // Check if the element already has a datepicker.
