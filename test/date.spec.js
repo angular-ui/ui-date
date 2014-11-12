@@ -364,28 +364,45 @@ describe('uiDateFormat', function() {
   });
 
   describe('with uiDateConfig', function() {
-    var element, scope, config;
-    var format = 'DD, d MM, yy';
-    var aDate = new Date(2012,9,11);
-    var aDateString = "Thursday, 11 October, 2012";
-    var aISODateString = aDate.toISOString();
-    beforeEach(inject(['$compile', '$rootScope', 'uiDateConfig', 'uiDateFormatConfig', function($compile, $rootScope, uiDateConfig, uiDateFormatConfig) {
-      config = uiDateConfig;
-      formatConfig = uiDateFormatConfig;
-      element = $compile('<input ui-date-format ng-model="x"/>')($rootScope);
-      scope = $rootScope;
-    }]));
+      var element, scope, config;
 
-    it('use ISO if not config value', function() {
-      scope.x = aISODateString;
-      scope.$digest();
-      expect(element.controller('ngModel').$viewValue).toEqual(aDate);
-    });
-    it('use format value if config given', function() {
-      formatConfig = format;
-      scope.x = aDateString;
-      scope.$digest();
-      expect(element.controller('ngModel').$viewValue).toEqual(aDate);
-    });
+      beforeEach(function() {
+          module('ui.date');
+      });
+
+      it('use ISO if not config value', function() {
+          inject(['$compile', '$rootScope', 'uiDateConfig', 'uiDateFormatConfig', function($compile, $rootScope, uiDateConfig, uiDateFormatConfig) {
+              element = $compile('<input ui-date-format ng-model="x"/>')($rootScope);
+              scope = $rootScope;
+          }]);
+
+          var aDate = new Date(2012,9,11);
+          var aISODateString = aDate.toISOString();      
+          scope.x = aISODateString;
+          scope.$digest();
+          expect(element.controller('ngModel').$viewValue).toEqual(aDate);
+      });
+
+      it('use format value if config given', function() {
+          var format = 'yy DD, d MM';
+          module(function($provide) {
+              $provide.constant('uiDateFormatConfig', format);
+          });
+
+          inject(['$compile', '$rootScope', 'uiDateConfig', 'uiDateFormatConfig', function($compile, $rootScope, uiDateConfig, uiDateFormatConfig) {
+              element = $compile('<input ui-date-format ng-model="x"/>')($rootScope);
+              scope = $rootScope;
+          }]);
+
+          var aDateString = '2012 Friday, 12 October';
+          var expectedDate = new Date('2012-10-12');
+          expectedDate.setHours(0,0,0,0); // new Date uses GMT but jQuery formatter does not
+
+          scope.x = aDateString;
+          scope.$digest();
+          expect(element.controller('ngModel').$viewValue).toEqual(expectedDate);
+      });
+
   });
+
 });

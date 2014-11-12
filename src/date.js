@@ -85,8 +85,9 @@ angular.module('ui.date', [])
 .factory('uiDateConverter', ['uiDateFormatConfig', function(uiDateFormatConfig){
 
     function dateToString(dateFormat, value){
+        dateFormat = dateFormat || uiDateFormatConfig;
         if (value) {
-            if ( dateFormat || uiDateFormatConfig) {
+            if (dateFormat) {
                 return jQuery.datepicker.formatDate(dateFormat, value);
             }
             return value.toISOString();
@@ -96,8 +97,9 @@ angular.module('ui.date', [])
     }
 
     function stringToDate(dateFormat, value) {
+        dateFormat = dateFormat || uiDateFormatConfig;
         if ( angular.isString(value) ) {
-            if ( dateFormat || uiDateFormatConfig) {
+            if (dateFormat) {
                 return jQuery.datepicker.parseDate(dateFormat, value);
             }
 
