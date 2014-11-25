@@ -73,10 +73,15 @@ angular.module('ui.date', [])
             element.datepicker("setDate", date);
           };
         }
-        // If we don't destroy the old one it doesn't update properly when the config changes
-        element.datepicker('destroy');
-        // Create the new datepicker widget
-        element.datepicker(opts);
+        // Check if the element already has a datepicker. 
+        if (element.data('datepicker')) {
+            // Updates the datepicker options
+            element.datepicker('option', opts);
+            element.datepicker('refresh');
+        } else
+            // Creates the new datepicker widget
+            element.datepicker(opts);
+            
         if ( controller ) {
           // Force a render to override whatever is in the input text box
           controller.$render();
