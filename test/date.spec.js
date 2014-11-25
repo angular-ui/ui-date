@@ -142,6 +142,45 @@ describe('uiDate', function() {
         expect(watched).toBeTruthy();
       });
     });
+
+    it('should call the user beforeShow event listener', function() {
+      inject(function($compile, $rootScope) {
+        var aDate, element;
+        $rootScope.beforeShowFn = function() {};
+        spyOn($rootScope, 'beforeShowFn');
+        spyOn($.datepicker, '_findPos').andReturn([0,0]);
+        aDate = new Date(2012,9,11);
+        element = $compile("<input ui-date='{beforeShow: beforeShowFn}' ng-model='x' />")($rootScope);
+        $rootScope.$apply();
+
+        expect($rootScope.beforeShowFn).not.toHaveBeenCalled();
+
+        element.datepicker('show');
+        $rootScope.$apply();
+
+        expect($rootScope.beforeShowFn).toHaveBeenCalled();
+      });
+    });
+
+    it('should call the user onClose event listener', function() {
+      inject(function($compile, $rootScope) {
+        var aDate, element;
+        $rootScope.onCloseFn = function() {};
+        spyOn($rootScope, 'onCloseFn');
+        spyOn($.datepicker, '_findPos').andReturn([0,0]);
+        aDate = new Date(2012,9,11);
+        element = $compile("<input ui-date='{onClose: onCloseFn}' ng-model='x' />")($rootScope);
+        $rootScope.$apply();
+
+        expect($rootScope.onCloseFn).not.toHaveBeenCalled();
+
+        element.datepicker('show');
+        element.datepicker('hide');
+        $rootScope.$apply();
+
+        expect($rootScope.onCloseFn).toHaveBeenCalled();
+      });
+    });
   });
 
   describe('use with ng-required directive', function() {

@@ -39,11 +39,17 @@ angular.module('ui.date', [])
               //element.blur();
             });
           };
-          opts.beforeShow = function() {
+
+          var _beforeShow = opts.beforeShow || angular.noop;
+          opts.beforeShow = function(input, picker) {
             showing = true;
+            _beforeShow(input, picker);
           };
+
+          var _onClose = opts.onClose || angular.noop;
           opts.onClose = function(value, picker) {
             showing = false;
+            _onClose(value, picker);
           };
           element.off('blur.datepicker').on('blur.datepicker', function() {
             if ( !showing ) {
