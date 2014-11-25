@@ -102,10 +102,12 @@ angular.module('ui.date', [])
             if (dateFormat) {
                 return jQuery.datepicker.formatDate(dateFormat, value);
             }
-            return value.toISOString();
-        } else {
-            return null;
+
+            if (value.toISOString) {
+                return value.toISOString();
+            }
         }
+        return null;
     }
 
     function stringToDate(dateFormat, value) {
