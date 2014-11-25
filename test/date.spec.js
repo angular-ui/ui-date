@@ -385,6 +385,15 @@ describe('uiDateFormat', function() {
       expect($rootScope.x).toBeNull();
     }));
 
+	it('should not freak out on invalid values', function() {
+      inject(function($compile, $rootScope) {
+        var element = $compile('<input ui-date-format ng-model="x"/>')($rootScope);
+        $rootScope.$digest();
+
+        element.controller('ngModel').$setViewValue('abcdef');
+      });
+    });
+
     it('should format a selected date correctly to a custom string', function() {
       inject(function($compile, $rootScope) {
         var format = 'DD, d MM, yy';
@@ -416,7 +425,7 @@ describe('uiDateFormat', function() {
           }]);
 
           var aDate = new Date(2012,9,11);
-          var aISODateString = aDate.toISOString();      
+          var aISODateString = aDate.toISOString();
           scope.x = aISODateString;
           scope.$digest();
           expect(element.controller('ngModel').$viewValue).toEqual(aDate);
