@@ -16,23 +16,13 @@ module.exports = function (grunt) {
   // Project configuration.
   grunt.initConfig({
     karma: {
-      unit: {
-        options: testConfig('test/test.conf.js')
-      }
+      options: testConfig('test/test.conf.js'),
+      singleRun: true
     },
     jshint:{
-      files:['src/**/*.js', 'test/**/*.js', 'demo/**/*.js'],
-      options:{
-        curly:true,
-        eqeqeq:true,
-        immed:true,
-        latedef:true,
-        newcap:true,
-        noarg:true,
-        sub:true,
-        boss:true,
-        eqnull:true,
-        globals:{}
+      files:['src/**/*.js', 'test/**/*.spec.js', 'demo/**/*.js'],
+      options: {
+          jshintrc: '.jshintrc'
       }
     },
     changelog: {
