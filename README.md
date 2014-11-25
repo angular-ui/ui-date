@@ -22,7 +22,7 @@ The karma task will try to open Chrome as a browser in which to run the tests.  
 
 # Usage
 
-We use [bower](http://twitter.github.com/bower/) for dependency management.  Install and save to bower.json by running:
+We use [bower](http://bower.io/) for dependency management.  Install and save to bower.json by running:
 
     bower install angular-ui-date --save
 
