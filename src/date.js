@@ -73,15 +73,16 @@ angular.module('ui.date', [])
             element.datepicker("setDate", date);
           };
         }
-        // Check if the element already has a datepicker. 
+        // Check if the element already has a datepicker.
         if (element.data('datepicker')) {
             // Updates the datepicker options
             element.datepicker('option', opts);
             element.datepicker('refresh');
-        } else
+        } else {
             // Creates the new datepicker widget
             element.datepicker(opts);
-            
+        }
+
         if ( controller ) {
           // Force a render to override whatever is in the input text box
           controller.$render();
