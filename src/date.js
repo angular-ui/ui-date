@@ -81,6 +81,11 @@ angular.module('ui.date', [])
         } else {
             // Creates the new datepicker widget
             element.datepicker(opts);
+
+            //Cleanup on destroy, prevent memory leaking
+            element.on('$destroy', function () {
+               element.datepicker('destroy');
+            });
         }
 
         if ( controller ) {

@@ -243,6 +243,19 @@ describe('uiDate', function() {
         expect($rootScope.x).toEqual(aDate);
       });
     });
+
+    it('should cleanup when the datepicker parent is removed', function() {
+        inject(function($compile, $rootScope) {
+            var element;
+            element = $compile('<div ui-date></div>')($rootScope);
+            expect(element.data('datepicker')).toBeUndefined();
+            $rootScope.$apply();
+            expect(element.children().length).toBe(1);
+            element.remove();
+            expect(element.children().length).toBe(0);
+        });
+    });
+
   });
   describe('use with ng-required directive', function() {
     it('should be invalid initially', function() {
