@@ -36,7 +36,7 @@ angular.module('ui.date', [])
               showing = true;
               controller.$setViewValue(element.datepicker('getDate'));
               _onSelect(value, picker);
-              //element.blur();
+              element.blur();
             });
           };
 
