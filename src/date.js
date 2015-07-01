@@ -30,6 +30,10 @@ angular.module('ui.date', [])
               isDate = angular.isDate(controller.$modelValue),
               preserve = {};
 
+          if(isDate && controller.$modelValue.toDateString() === element.datepicker('getDate').toDateString()) {
+            return;
+          }
+
           if (isDate) {
             angular.forEach(keys, function(key) {
               preserve[key] = controller.$modelValue['get' + key]();
