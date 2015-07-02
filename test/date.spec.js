@@ -35,6 +35,21 @@ describe('uiDate', function() {
         expect($rootScope.x).toEqual(aDate);
       });
     });
+    it('should not trigger a ng-change when nothing changes', function() {
+      inject(function($compile, $rootScope) {
+        var aDate, element;
+        aDate = new Date(2010, 12, 1);
+        element = $compile('<input ui-date ng-model="x" />')($rootScope);
+        $rootScope.$apply(function() {
+          $rootScope.x = aDate;
+        });
+        var cur = $rootScope.x;
+        element.focus();
+        element.blur();
+
+        expect($rootScope.x).toBe(cur);
+      });
+    });
     it('should hide the date picker after selecting a date', function() {
       inject(function($compile, $rootScope) {
         var aDate, element;
