@@ -35,7 +35,7 @@ Add the css:
 Load the script files in your application:
 
     <script type="text/javascript" src="components/jquery/jquery.js"></script>
-    <script type="text/javascript" src="components/jquery-ui/ui/jquery-ui.js"></script>
+    <script type="text/javascript" src="components/jquery-ui/jquery-ui.js"></script>
     <script type="text/javascript" src="components/angular/angular.js"></script>
     <script type="text/javascript" src="components/angular-ui-date/src/date.js"></script>
 
