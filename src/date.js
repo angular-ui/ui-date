@@ -107,6 +107,7 @@ angular.module('ui.date', [])
 
             //Cleanup on destroy, prevent memory leaking
             element.on('$destroy', function () {
+               element.datepicker('hide');
                element.datepicker('destroy');
             });
         }
