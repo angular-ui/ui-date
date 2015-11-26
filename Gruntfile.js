@@ -1,5 +1,6 @@
-module.exports = function (grunt) {
-
+module.exports = function(grunt) {
+  
+  // Tasks
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-conventional-changelog');
@@ -8,23 +9,34 @@ module.exports = function (grunt) {
   grunt.registerTask('default', ['jshint', 'karma']);
 
   var testConfig = function(configFile, customOptions) {
-    var options = { configFile: configFile, keepalive: true };
-    var travisOptions = process.env.TRAVIS && { browsers: ['Firefox'], reporters: 'dots' };
+    var options = {
+      configFile: configFile,
+      keepalive : true
+    };
+    
+    var travisOptions = process.env.TRAVIS && {
+      browsers : ['Firefox'],
+      reporters: 'dots'
+    };
+    
     return grunt.util._.extend(options, customOptions, travisOptions);
   };
 
   // Project configuration.
   grunt.initConfig({
     karma: {
-      options: testConfig('test/test.conf.js'),
+      options  : testConfig('test/test.conf.js'),
       singleRun: true
     },
-    jshint:{
-      files:['src/**/*.js', 'test/**/*.spec.js', 'demo/**/*.js'],
+    
+    jshint: {
       options: {
-          jshintrc: '.jshintrc'
-      }
+        jshintrc: '.jshintrc'
+      },
+      
+      files: ['src/**/*.js', 'test/**/*.spec.js', 'demo/**/*.js']
     },
+    
     changelog: {
       options: {
         dest: 'CHANGELOG.md'
