@@ -1,46 +1,54 @@
 module.exports = function(grunt) {
-
   // Tasks
-  grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-conventional-changelog');
-
-  // Default task.
-  grunt.registerTask('default', ['jshint', 'karma']);
-
-  var testConfig = function(configFile, customOptions) {
-    var options = {
-      configFile: configFile,
-      keepalive : true
-    };
-
-    var travisOptions = process.env.TRAVIS && {
-      browsers : ['Firefox'],
-      reporters: 'dots'
-    };
-
-    return grunt.util._.extend(options, customOptions, travisOptions);
-  };
+  require('load-grunt-tasks')(grunt);
 
   // Project configuration.
   grunt.initConfig({
     karma: {
-      options  : testConfig('karma.conf.js'),
-      singleRun: true
+      options: {
+        configFile: 'karma.conf.js'
+      },
+      unit: {
+        singleRun: false
+      },
+      travis: {
+        browsers: ['Firefox'],
+        reporters: 'dots',
+        autoWatch: false,
+        singleRun: true
+      }
     },
 
     jshint: {
       options: {
         jshintrc: '.jshintrc'
       },
-
       files: ['src/**/*.js', 'test/**/*.spec.js', 'demo/**/*.js']
     },
 
-    changelog: {
+    conventionalChangelog: {
       options: {
-        dest: 'CHANGELOG.md'
+        changelogOpts: {
+          // conventional-changelog options go here
+          preset: 'angular'
+        },
+      },
+      release: {
+        src: 'CHANGELOG.md'
       }
+    },
+
+  });
+
+  // Default task.
+  grunt.registerTask('default', ['jshint', 'test']);
+  grunt.registerTask('changelog', ['conventionalChangelog']);
+
+  grunt.registerTask('test', 'Run tests on karma server', function() {
+    if (process.env.TRAVIS) {
+      grunt.task.run('karma:travis');
+    } else {
+      grunt.task.run('karma:unit');
     }
   });
 

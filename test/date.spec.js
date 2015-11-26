@@ -1,10 +1,10 @@
 describe('uiDate', function() {
   'use strict';
-  var selectDate;
-  selectDate = function(element, date) {
+  function selectDate(element, date) {
     element.datepicker('setDate', date);
     $.datepicker._selectDate(element);
-  };
+  }
+
   beforeEach(module('ui.date'));
   describe('simple use on input element', function() {
     it('should have a date picker attached', function() {
