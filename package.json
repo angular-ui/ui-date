@@ -19,14 +19,15 @@
   },
   "devDependencies": {
     "bower": "^1.6.6",
-    "grunt": "~0.4.1",
+    "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
-    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-jshint": "^0.11.3",
     "grunt-conventional-changelog": "^5.0.0",
     "grunt-karma": "^0.12.1",
     "jasmine-core": "^2.3.4",
     "karma": "^0.13.0",
     "karma-chrome-launcher": "^0.2.1",
+    "karma-firefox-launcher": "^0.1.7",
     "karma-jasmine": "^0.3.6",
     "load-grunt-tasks": "^3.3.0"
   }
