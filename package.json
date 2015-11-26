@@ -1,21 +1,33 @@
 {
   "name": "angular-ui-date",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "description": "This directive allows you to add a date-picker to your form elements.",
+  "main": "src/date.js",
+  "scripts": {
+    "update": "bower update",
+    "test": "npm run update && grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Nexxa/ui-date.git"
+  },
   "author": "https://github.com/angular-ui/ui-date/graphs/contributors",
   "license": "MIT",
   "homepage": "http://angular-ui.github.com/ui-date",
-  "main": "src/date.js",
-  "dependencies": {},
-  "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.8.0",
-    "grunt-karma": "~0.4.3",
-    "grunt-conventional-changelog": "~1.0.0"
+  "bugs": {
+    "url": "https://github.com/angular-ui/ui-date/issues"
   },
-  "scripts": {},
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/angular-ui/ui-date.git"
+  "devDependencies": {
+    "bower": "^1.6.6",
+    "grunt": "~0.4.1",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-conventional-changelog": "^5.0.0",
+    "grunt-karma": "^0.12.1",
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.13.0",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-jasmine": "^0.3.6",
+    "load-grunt-tasks": "^3.3.0"
   }
 }
