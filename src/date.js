@@ -11,7 +11,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
   module.exports = 'ui.date';
 }
 
-(function(angular, $) {
+(function(angular) {
 
   'use strict';
 
@@ -30,7 +30,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         dateFormat = dateFormat || uiDateFormatConfig;
         if (value) {
           if (dateFormat) {
-            return $.datepicker.formatDate(dateFormat, value);
+            return jQuery.datepicker.formatDate(dateFormat, value);
           }
 
           if (value.toISOString) {
@@ -44,7 +44,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         dateFormat = dateFormat || uiDateFormatConfig;
         if (angular.isString(value)) {
           if (dateFormat) {
-            return $.datepicker.parseDate(dateFormat, value);
+            return jQuery.datepicker.parseDate(dateFormat, value);
           }
 
           var isoDate = new Date(value);
@@ -184,4 +184,4 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
       };
     }]);
     
-})(angular, jQuery);
+})(angular);
