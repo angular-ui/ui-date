@@ -4,7 +4,8 @@
   "description": "This directive allows you to add a date-picker to your form elements.",
   "main": "src/date.js",
   "scripts": {
-    "test": "bower update && grunt"
+    "update": "bower update",
+    "test": "npm run update && grunt"
   },
   "repository": {
     "type": "git",
