@@ -8,7 +8,7 @@
 
 // commonjs package manager support
 if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.exports === exports){
-  module.exports = 'ui-date';
+  module.exports = 'ui.date';
 }
 
 (function(angular, $) {
