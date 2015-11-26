@@ -18,11 +18,19 @@
     "url": "https://github.com/angular-ui/ui-date/issues"
   },
   "devDependencies": {
+    "angular": "^1.4.8",
+    "angular-mocks": "^1.4.8",
     "bower": "^1.6.6",
     "grunt": "~0.4.1",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-conventional-changelog": "~1.0.0",
-    "grunt-karma": "~0.4.3"
+    "grunt-karma": "^0.12.1",
+    "jasmine-core": "^2.3.4",
+    "jquery": "^2.1.4",
+    "jquery-ui": "^1.10.5",
+    "karma": "^0.13.0",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-jasmine": "^0.3.6"
   }
 }

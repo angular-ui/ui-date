@@ -172,7 +172,7 @@ describe('uiDate', function() {
         var aDate, element;
         $rootScope.beforeShowFn = function() {};
         spyOn($rootScope, 'beforeShowFn');
-        spyOn($.datepicker, '_findPos').andReturn([0, 0]);
+        spyOn($.datepicker, '_findPos').and.returnValue([0, 0]);
         aDate = new Date(2012, 9, 11);
         element = $compile('<input ui-date="{beforeShow: beforeShowFn}" ng-model="x" />')($rootScope);
         $rootScope.$apply();
@@ -191,7 +191,7 @@ describe('uiDate', function() {
         var aDate, element;
         $rootScope.onCloseFn = function() {};
         spyOn($rootScope, 'onCloseFn');
-        spyOn($.datepicker, '_findPos').andReturn([0, 0]);
+        spyOn($.datepicker, '_findPos').and.returnValue([0, 0]);
         aDate = new Date(2012, 9, 11);
         element = $compile('<input ui-date="{onClose: onCloseFn}" ng-model="x" />')($rootScope);
         $rootScope.$apply();
