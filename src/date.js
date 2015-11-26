@@ -4,7 +4,12 @@
  * @param [ui-date] {object} Options to pass to $.fn.datepicker() merged onto uiDateConfig
  */
 
-/*global angular, jQuery*/
+/*global angular, jQuery, module, exports*/
+
+// commonjs package manager support
+if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.exports === exports){
+  module.exports = 'ui-date';
+}
 
 (function(angular, $) {
 
