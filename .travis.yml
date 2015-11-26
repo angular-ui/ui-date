@@ -10,3 +10,4 @@ before_install:
   #- bower install
 
 #script: "grunt"
+sudo: false
