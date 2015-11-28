@@ -38,6 +38,5 @@ Fantastic, we are always looking for the quality contributions and will be happy
 
 We use [karma](http://karma-runner.github.io/) and jshint to ensure the quality of the code.  The easiest way to run these checks is the following
 
-    npm install -g grunt-cli
     npm install
     npm test
