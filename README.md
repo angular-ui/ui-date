@@ -18,7 +18,7 @@ We use [karma](http://karma-runner.github.io/0.8/index.html) and jshint to ensur
   bower install
   grunt
 
-The karma task will try to open Chrome as a browser in which to run the tests.  Make sure this is available or change the configuration in `test\test.config.js` 
+The karma task will try to open Chrome as a browser in which to run the tests.  Make sure this is available or change the configuration in `test\test.config.js`
 
 # Usage
 
@@ -26,7 +26,7 @@ We use [bower](http://bower.io/) for dependency management.  Install and save to
 
     bower install angular-ui-date --save
 
-This will copy the ui-date files into your `components` folder, along with its dependencies. 
+This will copy the ui-date files into your `components` folder, along with its dependencies.
 
 Add the css:
 
@@ -94,5 +94,3 @@ If you apply the required directive to element then the form element is invalid 
 Note: Remember that the ng-required directive must be explictly set, i.e. to "true".  This is especially true on divs:
 
     <div ui-date="dateOptions" name="DateOfBirth" ng-required="true"></div>
-
-
