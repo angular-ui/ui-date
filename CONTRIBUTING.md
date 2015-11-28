@@ -30,7 +30,11 @@ Fantastic, we are always looking for the quality contributions and will be happy
 * Please assure that you are submitting quality code, specifically make sure that:
   * your contribution has accompanying tests and all the tests are passing
   * your PR doesn't break the build; check the Travis-CI build status after opening a PR and push corrective commits if anything goes wrong
+<<<<<<< HEAD
   * your commit messages conform to the conventions established [here](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit)
+=======
+  * your commits conform to the conventions established [here](https://github.com/ajoslin/conventional-changelog/blob/master/conventions/angular.md)
+>>>>>>> 80d9f5de952a642b5977369599124fc6387c1e31
 
   [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
