@@ -447,6 +447,22 @@ describe('uiDateFormat', function() {
         expect(element.controller('ngModel').$viewValue).toEqual(aDate);
       });
     });
+
+    it('should parse the date correctly from a UNIX timestamp in milliseconds', function() {
+      inject(function($compile, $rootScope) {
+        var aDate = new Date(2012, 9, 11);
+        var aDateTimestamp = aDate.getTime();
+
+        var element = $compile('<input ui-date-format="@" ng-model="x"/>')($rootScope);
+        $rootScope.x = aDateTimestamp;
+        $rootScope.$digest();
+
+        //Check that the model has not been altered
+        expect($rootScope.x).toEqual(aDateTimestamp);
+        // Check that the viewValue has been parsed correctly
+        expect(element.controller('ngModel').$viewValue).toEqual(aDate);
+      });
+    });
   });
 
   describe('with uiDateConfig', function() {
