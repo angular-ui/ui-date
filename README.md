@@ -9,16 +9,9 @@ This directive allows you to add a date-picker to your form elements.
 - JQueryUI
 - [Date.toISOString()](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Date/toISOString) (requires [polyfill](https://github.com/kriskowal/es5-shim/) for &le;IE8)
 
-# Testing
+# Alternatives
 
-We use [karma](http://karma-runner.github.io/0.8/index.html) and jshint to ensure the quality of the code.  The easiest way to run these checks is to use grunt:
-
-  npm install -g grunt-cli
-  npm install
-  bower install
-  grunt
-
-The karma task will try to open Chrome as a browser in which to run the tests.  Make sure this is available or change the configuration in `test\test.config.js` 
+Please consider using the excellent [ui-bootstrap](https://angular-ui.github.io/bootstrap/) date-picker which is maintained by a larger team.
 
 # Usage
 
@@ -26,22 +19,22 @@ We use [bower](http://bower.io/) for dependency management.  Install and save to
 
     bower install angular-ui-date --save
 
-This will copy the ui-date files into your `components` folder, along with its dependencies. 
+This will copy the ui-date files into your `bower_components` folder, along with its dependencies.
 
 Add the css:
 
-    <link rel="stylesheet" href="components/jquery-ui/themes/smoothness/jquery-ui.css"/>
+    <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css"/>
 
 Load the script files in your application:
 
-    <script type="text/javascript" src="components/jquery/jquery.js"></script>
-    <script type="text/javascript" src="components/jquery-ui/jquery-ui.js"></script>
-    <script type="text/javascript" src="components/angular/angular.js"></script>
-    <script type="text/javascript" src="components/angular-ui-date/src/date.js"></script>
+    <script type="text/javascript" src="bower_components/jquery/jquery.js"></script>
+    <script type="text/javascript" src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-date/src/date.js"></script>
 
 Add the date module as a dependency to your application module:
 
-    var myAppModule = angular.module('MyApp', ['ui.date'])
+    angular.module('MyApp', ['ui.date'])
 
 Apply the directive to your form elements:
 
@@ -51,13 +44,13 @@ Apply the directive to your form elements:
 
 All the jQueryUI DatePicker options can be passed through the directive.
 
-	myAppModule.controller('MyController', function($scope) {
-		$scope.dateOptions = {
-			changeYear: true,
-			changeMonth: true,
-			yearRange: '1900:-0'
-		};
-	});
+    myAppModule.controller('MyController', function($scope) {
+      $scope.dateOptions = {
+        changeYear: true,
+        changeMonth: true,
+        yearRange: '1900:-0'
+        };
+    });
 
     <input ui-date="dateOptions" name="DateOfBirth">
 
@@ -76,6 +69,7 @@ If you add the ng-model directive to same the element as ui-date then the picked
 _The ui-date directive stores and expects the model value to be a standard javascript Date object._
 
 ## ui-date-format directive
+
 The ui-date directive only works with Date objects.
 If you want to pass date strings to and from the date directive via ng-model then you must use the ui-date-format directive.
 This directive specifies the format of the date string that will be expected in the ng-model.
@@ -96,3 +90,16 @@ Note: Remember that the ng-required directive must be explictly set, i.e. to "tr
     <div ui-date="dateOptions" name="DateOfBirth" ng-required="true"></div>
 
 
+## Need help?
+Need help using UI date?
+
+* Ask a question in [StackOverflow](http://stackoverflow.com/) under the [angular-ui-date](http://stackoverflow.com/questions/tagged/angular-ui-date) tag.
+
+**Please do not create new issues in this repository to ask questions about using UI date**
+
+## Found a bug?
+Please take a look at [CONTRIBUTING.md](CONTRIBUTING.md#you-think-youve-found-a-bug).
+
+# Contributing to the project
+
+We are always looking for the quality contributions! Please check the [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution guidelines.
