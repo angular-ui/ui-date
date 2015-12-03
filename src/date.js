@@ -37,6 +37,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           if (value.toISOString) {
             return value.toISOString();
           }
+
         }
         return null;
       }
@@ -55,6 +56,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 
           var isoDate = new Date(valueToParse);
           return isNaN(isoDate.getTime()) ? null : isoDate;
+
         }
 
         if (angular.isNumber(valueToParse)) {
@@ -92,13 +94,16 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
                   preserve[key] = controller.$modelValue['get' + key]();
                 });
               }
-              controller.$setViewValue(element.datepicker('getDate'));
+
+              var newViewValue = element.datepicker('getDate');
 
               if (isDate) {
                 angular.forEach(keys, function(key) {
-                  controller.$viewValue['set' + key](preserve[key]);
+                  newViewValue['set' + key](preserve[key]);
                 });
               }
+
+              controller.$setViewValue(newViewValue);
             }
 
             // If we have a controller (i.e. ngModelController) then wire it up
