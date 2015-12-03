@@ -27,7 +27,11 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         dateFormat = dateFormat || uiDateFormatConfig;
         if (value) {
           if (dateFormat) {
-            return jQuery.datepicker.formatDate(dateFormat, value);
+            try {
+              return jQuery.datepicker.formatDate(dateFormat, value);
+            } catch (formatException) {
+              return undefined;
+            }
           }
 
           if (value.toISOString) {
