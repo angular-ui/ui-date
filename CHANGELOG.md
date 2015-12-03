@@ -1,3 +1,13 @@
+<a name="0.0.11"></a>
+## [0.0.11](https://github.com/Nexxa/ui-date/compare/0.0.10...v0.0.11) (2015-12-03)
+
+
+### Bug Fixes
+
+* **date:** Prevent jquery datepicker formatDate exception ([10c0e54](https://github.com/Nexxa/ui-date/commit/10c0e54)), closes [#48](https://github.com/Nexxa/ui-date/issues/48)
+
+
+
 <a name="0.0.10"></a>
 ## [0.0.10](https://github.com/Nexxa/ui-date/compare/0.0.8...v0.0.10) (2015-11-26)
 
