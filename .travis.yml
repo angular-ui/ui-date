@@ -11,3 +11,7 @@ before_install:
 
 #script: "grunt"
 sudo: false
+
+cache:
+  directories:
+    - node_modules

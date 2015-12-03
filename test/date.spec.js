@@ -411,6 +411,17 @@ describe('uiDateFormat', function() {
       });
     });
 
+    it('should not throw when a user types in an incomplete value', function() {
+      inject(function($compile, $rootScope) {
+        var element = $compile('<input ui-date-format="yy-mm-dd" ng-model="x"/>')($rootScope);
+        var ngModel = element.controller('ngModel');
+        expect(function incompleteValue() {
+          ngModel.$setViewValue('2015-');
+        }).not.toThrow();
+        expect(ngModel.$modelValue).toBeUndefined();
+      });
+    });
+
     it('should convert empty strings to null', inject(function($compile, $rootScope) {
       var element = $compile('<input ui-date-format ng-model="x">')($rootScope);
       element.controller('ngModel').$setViewValue('');
