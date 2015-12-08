@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/Nexxa/ui-date.git"
+    "url": "git@github.com:angular-ui/ui-date.git"
   },
   "author": "https://github.com/angular-ui/ui-date/graphs/contributors",
   "license": "MIT",
@@ -23,6 +23,11 @@
   "bugs": {
     "url": "https://github.com/angular-ui/ui-date/issues"
   },
+  "keywords": [
+    "AngularJS",
+    "directive",
+    "datepicker"
+  ],
   "devDependencies": {
     "bower": "^1.7.0",
     "commitizen": "^2.4.6",
