@@ -4,8 +4,14 @@
   "description": "This directive allows you to add a date-picker to your form elements.",
   "main": "src/date.js",
   "scripts": {
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w",
+    "commit": "git-cz",
+    "lint": "eslint src/** test/** --ext .js",
     "update": "bower update",
-    "test": "npm run update && grunt"
+    "pretest": "npm run update",
+    "test": "npm run lint && karma start --single-run",
+    "test:watch": "karma start",
+    "test:single": "karma start --single-run"
   },
   "repository": {
     "type": "git",
@@ -18,19 +24,16 @@
     "url": "https://github.com/angular-ui/ui-date/issues"
   },
   "devDependencies": {
-    "bower": "^1.6.6",
-    "cz-conventional-changelog": "^1.1.4",
-    "grunt": "^0.4.5",
-    "grunt-cli": "^0.1.13",
-    "grunt-contrib-jshint": "^0.11.3",
-    "grunt-conventional-changelog": "^5.0.0",
-    "grunt-karma": "^0.12.1",
-    "jasmine-core": "^2.3.4",
-    "karma": "^0.13.0",
-    "karma-chrome-launcher": "^0.2.1",
+    "bower": "^1.7.0",
+    "commitizen": "^2.4.6",
+    "conventional-changelog": "^0.5.1",
+    "cz-conventional-changelog": "^1.1.5",
+    "eslint": "^1.10.3",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.15",
+    "karma-chrome-launcher": "^0.2.2",
     "karma-firefox-launcher": "^0.1.7",
-    "karma-jasmine": "^0.3.6",
-    "load-grunt-tasks": "^3.3.0"
+    "karma-jasmine": "^0.3.6"
   },
   "config": {
     "commitizen": {
