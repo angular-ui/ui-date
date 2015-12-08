@@ -1,5 +1,4 @@
 describe('uiDate', function() {
-  'use strict';
 
   function selectDate(element, date) {
     element.datepicker('setDate', date);
@@ -331,7 +330,6 @@ describe('uiDate', function() {
 });
 
 describe('uiDateFormat', function() {
-  'use strict';
   beforeEach(module('ui.date'));
 
   describe('$formatting', function() {

@@ -1,15 +1,9 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>AngularUI - Date Picker Demo</title>
     <base href=".."></base>
-    
     <!-- Styles -->
     <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css">
   </head>
@@ -18,14 +12,14 @@
     <!-- Date -->
     <label for="date">Select Date:</label>
     <input type="text" id="date" ui-date ng-model="aDate">
-    
+
     <div>{{ aDate }}</div>
-    
+
     <!-- Scripts -->
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="bower_components/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-    <script type="text/javascript" src="src/date.js"></script>
+    <script type="text/javascript" src="dist/date.js"></script>
   </body>
 
 </html>
