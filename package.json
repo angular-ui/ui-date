@@ -1,10 +1,10 @@
 {
   "name": "angular-ui-date",
-  "version": "0.0.11",
+  "version": "1.0.0-beta.0",
   "description": "This directive allows you to add a date-picker to your form elements.",
   "main": "dist/date.js",
   "scripts": {
-    "build": "npm run lint && webpack",
+    "build": "npm run test && webpack",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w",
     "commit": "git-cz",
     "lint": "eslint src/** test/** --ext .js",
