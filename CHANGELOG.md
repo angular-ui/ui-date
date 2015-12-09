@@ -1,3 +1,9 @@
+<a name="1.0.0-beta.0"></a>
+# [1.0.0-beta.0](https://github.com/angular-ui/ui-date/compare/0.0.11...v1.0.0-beta.0) (2015-12-09)
+
+Update build to support umd and webpack.
+
+
 <a name="0.0.11"></a>
 ## [0.0.11](https://github.com/Nexxa/ui-date/compare/0.0.10...v0.0.11) (2015-12-03)
 
@@ -94,6 +100,3 @@
 ### Features
 
 * **tests:** Added image for build status ([aad7b9f](https://github.com/Nexxa/ui-date/commit/aad7b9f))
-
-
-
