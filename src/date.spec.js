@@ -1,12 +1,19 @@
+import $ from 'jquery';
+import angular from 'angular';
+import _angularMocks from 'angular-mocks';
+import uiDate from './date.js';
+
+const module = angular.mock.module;
+const inject = angular.mock.inject;
+
 describe('uiDate', function() {
-  'use strict';
 
   function selectDate(element, date) {
     element.datepicker('setDate', date);
     $.datepicker._selectDate(element);
   }
 
-  beforeEach(module('ui.date'));
+  beforeEach(module(uiDate.name));
   describe('simple use on input element', function() {
     it('should have a date picker attached', function() {
       inject(function($compile, $rootScope) {
@@ -51,6 +58,7 @@ describe('uiDate', function() {
         expect($rootScope.x).toBe(cur);
       });
     });
+  // this test passes on chrome 47 but dies on firefox 42.  Travis on firefox 31 is ok
   // it('should hide the date picker after selecting a date', function() {
   //   inject(function($compile, $rootScope, $document) {
   //     var aDate, element;
@@ -276,6 +284,7 @@ describe('uiDate', function() {
         $rootScope.$apply();
         expect(element.children().length).toBe(1);
         element.remove();
+        $rootScope.$apply();
         expect(element.children().length).toBe(0);
       });
     });
@@ -316,7 +325,7 @@ describe('uiDate', function() {
       inject(function($compile, $rootScope) {
         var element;
         $rootScope.config = {
-          minDate: 5
+          minDate: 5,
         };
         element = $compile('<input ui-date="config" ng-model="x"/>')($rootScope);
         $rootScope.$apply();
@@ -331,7 +340,6 @@ describe('uiDate', function() {
 });
 
 describe('uiDateFormat', function() {
-  'use strict';
   beforeEach(module('ui.date'));
 
   describe('$formatting', function() {
@@ -467,7 +475,7 @@ describe('uiDateFormat', function() {
         $rootScope.x = aDateTimestamp;
         $rootScope.$digest();
 
-        //Check that the model has not been altered
+        // Check that the model has not been altered
         expect($rootScope.x).toEqual(aDateTimestamp);
         // Check that the viewValue has been parsed correctly
         expect(element.controller('ngModel').$viewValue).toEqual(aDate);

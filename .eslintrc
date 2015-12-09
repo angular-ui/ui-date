@@ -1,4 +1,25 @@
 {
+
+  "ecmaFeatures": {
+    "arrowFunctions": true,
+    "blockBindings": true,
+    "classes": true,
+    "defaultParams": true,
+    "destructuring": true,
+    "forOf": true,
+    "generators": false,
+    "modules": true,
+    "objectLiteralComputedProperties": true,
+    "objectLiteralDuplicateProperties": false,
+    "objectLiteralShorthandMethods": true,
+    "objectLiteralShorthandProperties": true,
+    "restParams": true,
+    "spread": true,
+    "superInFunctions": true,
+    "templateStrings": true,
+    "jsx": true
+  },
+
   "env": {
     "jasmine": true,
     "node": true,
@@ -56,7 +77,9 @@
     "no-sequences": 2,
     "no-shadow": 2,
     "no-undef": 2,
-    "no-unused-vars": 2,
+    "no-unused-vars": [2,
+      {"vars": "all", "varsIgnorePattern": "^_"}
+    ],
     "no-with": 2,
     "quotes": [
       2,

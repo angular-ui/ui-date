@@ -1,4 +1,4 @@
-# ui-date directive [![Build Status](https://travis-ci.org/angular-ui/ui-date.svg)](https://travis-ci.org/angular-ui/ui-date)
+# ui-date directive [![Build Status](https://travis-ci.org/angular-ui/ui-date.svg)](https://travis-ci.org/angular-ui/ui-date)]
 
 This directive allows you to add a date-picker to your form elements.
 
@@ -30,7 +30,7 @@ Load the script files in your application:
     <script type="text/javascript" src="bower_components/jquery/jquery.js"></script>
     <script type="text/javascript" src="bower_components/jquery-ui/jquery-ui.js"></script>
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-    <script type="text/javascript" src="bower_components/angular-ui-date/src/date.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-date/dist/date.js"></script>
 
 Add the date module as a dependency to your application module:
 
@@ -90,6 +90,53 @@ Note: Remember that the ng-required directive must be explictly set, i.e. to "tr
     <div ui-date="dateOptions" name="DateOfBirth" ng-required="true"></div>
 
 
+## Usage with webpack
+
+Install with npm:
+
+    npm install --save-dev jquery jquery-ui angular angular-ui-date
+
+Use in your app:
+
+```javascript
+import angular from 'angular';
+import uiDate from 'angular-ui-date';
+
+require('jquery-ui/themes/base/minified/jquery-ui.min.css');
+
+angular.module('MyTest', [uiDate.name])
+.controller('MyCtrl', ['$scope', function($scope) {
+    $scope.myDate = new Date('2015-11-17');
+}]);
+```
+
+It is also good to ensure that jQuery is available so that angular and jquery ui can attach to it.
+
+```javascript
+    webpack: {
+      plugins: [
+        new webpack.ProvidePlugin({
+          'window.jQuery': 'jquery',
+        }),
+      ]
+    }
+```
+
+another method of making jQuery recognized is to use the webpack expose-loader to expose it both as $ and jQuery
+
+```javascript
+    webpack: {
+      module: {
+        loaders: [
+                  // it helps angular to have jQuery exposed so that it uses $ instead of jqLite      
+                   {
+                     test: require.resolve('jquery'),
+                     loader: 'expose?$!expose?jQuery',
+                   },
+                ]
+              }
+            }
+```
 ## Need help?
 Need help using UI date?
 
