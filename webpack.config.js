@@ -3,14 +3,15 @@
 module.exports = {
 
   entry: {
-    date: './src/date.js'
+    date: './src/date.js',
   },
 
   output: {
     path: __dirname + '/dist',
     filename: '[name].js',
     libraryTarget: 'umd',
-    library: 'angularUiDate'
+    library: 'angularUiDate',
+    publicPath: 'assets',
   },
 
   module: {
@@ -20,10 +21,10 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel',
         query: {
-          presets: ['es2015']
-        }
+          presets: ['es2015'],
+        },
       },
-    ]
+    ],
   },
 
   externals: {
@@ -47,5 +48,5 @@ module.exports = {
   devtool: '#cheap-source-map',
   devServer: {
     contentBase: './demo',
-  }
-}
+  },
+};

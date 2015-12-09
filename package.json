@@ -9,7 +9,7 @@
     "commit": "git-cz",
     "lint": "eslint src/** test/** --ext .js",
     "update": "bower update",
-    "pretest": "npm run update",
+    "start": "npm run update && webpack-dev-server",
     "test": "npm run lint && karma start --single-run",
     "test:watch": "karma start",
     "test:single": "karma start --single-run",
