@@ -62,8 +62,7 @@ export default angular.module('ui.date', [])
       require: '?ngModel',
       link: function link(scope, element, attrs, controller) {
 
-        var $element = element;
-
+        var $element = jQuery(element);
         var getOptions = function() {
           return angular.extend({}, uiDateConfig, scope.$eval(attrs.uiDate));
         };

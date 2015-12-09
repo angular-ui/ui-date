@@ -74,7 +74,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	//sets up jQuery with the datepicker plugin
+	// sets up jQuery with the datepicker plugin
 
 	exports.default = _angular2.default.module('ui.date', []).constant('uiDateConfig', {}).constant('uiDateFormatConfig', '').factory('uiDateConverter', ['uiDateFormatConfig', function (uiDateFormatConfig) {
 	  return {
@@ -130,7 +130,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    link: function link(scope, element, attrs, controller) {
 
 	      var $element = (0, _jquery2.default)(element);
-
+	      console.log('hi there!');
 	      var getOptions = function getOptions() {
 	        return _angular2.default.extend({}, uiDateConfig, scope.$eval(attrs.uiDate));
 	      };
@@ -223,7 +223,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          // Creates the new datepicker widget
 	          $element.datepicker(opts);
 
-	          //Cleanup on destroy, prevent memory leaking
+	          // Cleanup on destroy, prevent memory leaking
 	          $element.on('$destroy', function () {
 	            $element.datepicker('hide');
 	            $element.datepicker('destroy');
