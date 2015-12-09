@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import angular from 'angular';
 import _angularMocks from 'angular-mocks';
-import uiDate from '../src/date.js';
+import uiDate from './date.js';
 
 const module = angular.mock.module;
 const inject = angular.mock.inject;
@@ -58,6 +58,7 @@ describe('uiDate', function() {
         expect($rootScope.x).toBe(cur);
       });
     });
+  // this test passes on chrome 47 but dies on firefox 42.  Travis on firefox 31 is ok
   // it('should hide the date picker after selecting a date', function() {
   //   inject(function($compile, $rootScope, $document) {
   //     var aDate, element;

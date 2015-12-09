@@ -8,12 +8,12 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
 
     files: [
-      'test/**/*.js',
+      'src/*.spec.js',
     ],
 
     preprocessors: {
       // add webpack as preprocessor
-      'test/*.js': ['webpack'],
+      'src/*.spec.js': ['webpack'],
     },
 
     webpack: {
