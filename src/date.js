@@ -2,6 +2,7 @@ import jQuery from 'jquery';
 import angular from 'angular';
 import _datePicker from 'jquery-ui/datepicker'; // sets up jQuery with the datepicker plugin
 
+
 export default angular.module('ui.date', [])
   .constant('uiDateConfig', {})
   .constant('uiDateFormatConfig', '')
@@ -122,6 +123,12 @@ export default angular.module('ui.date', [])
               showing = false;
               _onClose(value, picker);
             };
+
+            element.on('focus', function(focusEvent) {
+              if (attrs.readonly) {
+                focusEvent.stopImmediatePropagation();
+              }
+            });
 
             $element.off('blur.datepicker').on('blur.datepicker', function() {
               if (!showing) {
