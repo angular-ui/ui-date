@@ -1,6 +1,6 @@
 import jQuery from 'jquery';
 import angular from 'angular';
-import _datePicker from 'jquery-ui/datepicker'; //sets up jQuery with the datepicker plugin
+import _datePicker from 'jquery-ui/datepicker'; // sets up jQuery with the datepicker plugin
 
 export default angular.module('ui.date', [])
   .constant('uiDateConfig', {})
@@ -8,7 +8,7 @@ export default angular.module('ui.date', [])
   .factory('uiDateConverter', ['uiDateFormatConfig', function(uiDateFormatConfig) {
     return {
       stringToDate: stringToDate,
-      dateToString: dateToString
+      dateToString: dateToString,
     };
 
     function dateToString(dateFormat, value) {
@@ -62,7 +62,7 @@ export default angular.module('ui.date', [])
       require: '?ngModel',
       link: function link(scope, element, attrs, controller) {
 
-        let $element = jQuery(element);
+        var $element = element;
 
         var getOptions = function() {
           return angular.extend({}, uiDateConfig, scope.$eval(attrs.uiDate));
@@ -70,7 +70,6 @@ export default angular.module('ui.date', [])
         var initDateWidget = function() {
           var showing = false;
           var opts = getOptions();
-
 
           function setVal() {
             var keys = ['Hours', 'Minutes', 'Seconds', 'Milliseconds'];
@@ -157,7 +156,7 @@ export default angular.module('ui.date', [])
             // Creates the new datepicker widget
             $element.datepicker(opts);
 
-            //Cleanup on destroy, prevent memory leaking
+            // Cleanup on destroy, prevent memory leaking
             $element.on('$destroy', function() {
               $element.datepicker('hide');
               $element.datepicker('destroy');
@@ -172,7 +171,7 @@ export default angular.module('ui.date', [])
 
         // Watch for changes to the directives options
         scope.$watch(getOptions, initDateWidget, true);
-      }
+      },
     };
   }])
 
@@ -190,6 +189,6 @@ export default angular.module('ui.date', [])
         modelCtrl.$parsers.push(function(value) {
           return uiDateConverter.dateToString(dateFormat, value);
         });
-      }
+      },
     };
   }]);

@@ -1,31 +1,55 @@
 // Karma configuration
 //
+var webpack = require('webpack');
 module.exports = function(config) {
-  'use strict';
   config.set({
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
-
-    // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
 
-    // list of files / patterns to load in the browser
     files: [
-      'bower_components/jquery/dist/jquery.min.js',
-      'bower_components/jquery-ui/jquery-ui.min.js', // would require a pre-processor for the npm version
-      'bower_components/angular/angular.min.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'src/**/*.js',
-      'test/**/*.js'
+      'test/**/*.js',
     ],
+
+    preprocessors: {
+      // add webpack as preprocessor
+      'test/*.js': ['webpack'],
+    },
+
+    webpack: {
+      plugins: [
+        new webpack.ProvidePlugin({
+          // $: 'jquery',
+          // jQuery: 'jquery',
+          'window.jQuery': 'jquery',
+        }),
+      ],
+      module: {
+        loaders: [
+          // it helps angular to have jQuery exposed so that it uses $ instead of jqLite
+          // this is an alternative to using a webpack provide plugin
+          // {
+          //   test: require.resolve('jquery'),
+          //   loader: 'expose?$!expose?jQuery',
+          // },
+          {
+            test: /(\.js$)/,
+            exclude: /(node_modules|bower_components)/,
+            loader: 'babel',
+            query: {
+              presets: ['es2015'],
+            },
+          },
+        ],
+      },
+    },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['progress'],
 
-    reportSlowerThan: 100,
+    reportSlowerThan: 200,
 
     // web server port
     port: 9876,
@@ -46,7 +70,9 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: false,
+
+
   });
 
   if (process.env.TRAVIS) {
@@ -54,7 +80,7 @@ module.exports = function(config) {
       browsers: ['Firefox'],
       reporters: 'dots',
       autoWatch: false,
-      singleRun: true
+      singleRun: true,
     });
   }
 

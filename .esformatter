@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    "esformatter-semicolons",
+    "esformatter-add-trailing-commas",
+    "esformatter-quotes",
+    "esformatter-braces",
+    "esformatter-spaced-lined-comment"
+  ],
+  "quotes": {
+    "type": "single"
+    }
+}
