@@ -10,16 +10,29 @@
 
   <body ng-app="ui.date">
     <!-- Date -->
+    <div ng-controller='MyCtrl'>
     <label for="date">Select Date:</label>
-    <input type="text" id="date" ui-date ng-model="aDate">
+    <input type="text" id="date" ui-date="dateOptions"ng-model="aDate">
 
     <div>{{ aDate }}</div>
-
+    <a href="#" ng-click="logDate()">log date</a>
+  </div>
     <!-- Scripts -->
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="bower_components/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="assets/date.js"></script>
+    <script>
+      angular.module('ui.date').controller('MyCtrl', function($scope) {
+          $scope.aDate = new Date();
+          $scope.dateOptions = {
+            dateFormat: 'dd-mm-yy'
+          }
+          $scope.logDate = function(){
+            console.log($scope.aDate);
+          }
+      })
+    </script>
   </body>
 
 </html>
