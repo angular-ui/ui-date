@@ -55,7 +55,11 @@ describe('uiDate', function() {
         element.focus();
         element.blur();
 
-        expect($rootScope.x).toBe(cur);
+        expect($rootScope.x).toEqual(cur);
+      // cur = $rootScope.x;
+      // element.focus();
+      // element.blur();
+      // expect($rootScope.x).toBe(cur);
       });
     });
   // this test passes on chrome 47 but dies on firefox 42.  Travis on firefox 31 is ok
@@ -137,6 +141,16 @@ describe('uiDate', function() {
       $rootScope.$apply();
       selectDate(element, $rootScope.x);
       expect($rootScope.x.getHours()).toBe(15);
+    });
+  });
+
+  it('should convert a model string to a Date immediately after applied', function() {
+    inject(function($compile, $rootScope) {
+      $rootScope.x = '2015-09-13';
+      var element = $compile('<input ui-date ng-model="x"/>')($rootScope);
+      $rootScope.$apply();
+      selectDate(element, $rootScope.x);
+      expect($rootScope.x).toEqual(new Date('2015-09-13'));
     });
   });
 

@@ -71,14 +71,14 @@ export default angular.module('ui.date', [])
           var showing = false;
           var opts = getOptions();
 
-          function setVal() {
+          function setVal(forcedUpdate) {
             var keys = ['Hours', 'Minutes', 'Seconds', 'Milliseconds'];
             var isDate = angular.isDate(controller.$modelValue);
             var preserve = {};
 
-            // if (isDate && controller.$modelValue.toDateString() === $element.datepicker('getDate').toDateString()) {
-            //   return;
-            // }
+            if (!forcedUpdate && isDate && controller.$modelValue.toDateString() === $element.datepicker('getDate').toDateString()) {
+              return;
+            }
 
             if (isDate) {
               angular.forEach(keys, function(key) {
@@ -142,7 +142,10 @@ export default angular.module('ui.date', [])
 
             // Update the date picker when the model changes
             controller.$render = function() {
-
+              // Force a render to override whatever is in the input text box
+              if (angular.isDate(controller.$modelValue) === false && angular.isString(controller.$modelValue)) {
+                controller.$modelValue = uiDateConverter.stringToDate(attrs.uiDateFormat, controller.$modelValue);
+              }
               $element.datepicker('setDate', controller.$modelValue);
             };
           }
@@ -165,13 +168,9 @@ export default angular.module('ui.date', [])
           }
 
           if (controller) {
-            // Force a render to override whatever is in the input text box
-            if (angular.isDate(controller.$modelValue) === false) {
-              controller.$modelValue = uiDateConverter.stringToDate(attrs.uiDateFormat, controller.$modelValue);
-            }
             controller.$render();
-            // Update the model with the value from the datepicker
-            setVal();
+            // Update the model with the value from the datepicker after parsed
+            setVal(true);
           }
         };
 
