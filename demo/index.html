@@ -8,14 +8,26 @@
     <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css">
   </head>
 
-  <body ng-app="ui.date">
+  <body ng-app="MyApp">
     <!-- Date -->
     <div ng-controller='MyCtrl'>
-    <label for="date">Select Date:</label>
-    <input type="text" id="date" ui-date="dateOptions" ng-model="aDate">
 
-    <div>{{ aDate }}</div>
-    <a href="#" ng-click="logDate()">log date</a>
+    <form name="myForm">
+
+      <label for="date">Select Date:</label>
+      <input type="text" id="date" ui-date="dateOptions" ng-model="aDate">
+
+      <div>{{ aDate }}</div>
+
+
+      <div class="field">
+        Required date: <input type="text" name="date2" required  ui-date="" ng-model="reqDate">
+        <div ng-if="myForm.date2.$error.required">
+          The required date field is required.
+        </div>
+      </div>
+    </form>
+
   </div>
     <!-- Scripts -->
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
@@ -23,13 +35,11 @@
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="assets/date.js"></script>
     <script>
-      angular.module('ui.date').controller('MyCtrl', function($scope) {
+      angular.module('MyApp', ['ui.date'])
+      .controller('MyCtrl', function($scope) {
           $scope.aDate = '2015-10-31';
           $scope.dateOptions = {
-            //  dateFormat: 'dd/mm/yy',
-          }
-          $scope.logDate = function(){
-            console.log($scope.aDate);
+             dateFormat: 'dd.mm.yy',
           }
       })
     </script>
