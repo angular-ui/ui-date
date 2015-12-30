@@ -123,6 +123,12 @@ export default angular.module('ui.date', [])
               _onClose(value, picker);
             };
 
+            element.on('focus', function(focusEvent) {
+              if (attrs.readonly) {
+                focusEvent.stopImmediatePropagation();
+              }
+            });
+
             $element.off('blur.datepicker').on('blur.datepicker', function() {
               if (!showing) {
                 scope.$apply(function() {

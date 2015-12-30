@@ -11,13 +11,15 @@
   <body ng-app="MyApp">
     <!-- Date -->
     <div ng-controller='MyCtrl'>
-
     <form name="myForm">
 
       <label for="date">Select Date:</label>
       <input type="text" id="date" ui-date="dateOptions" ng-model="aDate">
 
       <div>{{ aDate }}</div>
+      <div>
+        Read only <input type="text" ui-date ng-model="aDate" readonly>
+      </div>
 
 
       <div class="field">

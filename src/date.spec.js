@@ -33,6 +33,25 @@ describe('uiDate', function() {
         expect(element.datepicker('getDate')).toEqual(aDate);
       });
     });
+    it('should handle the "readonly" attribute', function() {
+      inject(function($compile, $rootScope) {
+        var element;
+        element = $compile('<input ui-date readonly=\'readonly\' />')($rootScope);
+        $rootScope.$apply();
+        $(document.body).append(element);
+        // On initial load the datepicker is attached to the DOM but its style (i.e.
+        // display: none) has not been applied -- it will be invisible but the
+        // ":visible" will fail which would be solved for checking ":empty". However,
+        // this doesn't handle the case where the readonly attribute is dynamically
+        // toggled -- so for this test to pass properly, we must first initialize the
+        // datepicker by toggling it before checking visibility.
+        element.datepicker('show');
+        element.datepicker('hide');
+        element.focus();
+        expect(angular.element('#ui-datepicker-div').is(':visible')).toBeFalsy();
+        element.remove();
+      });
+    });
     it('should put the date in the model', function() {
       inject(function($compile, $rootScope) {
         var aDate, element;
