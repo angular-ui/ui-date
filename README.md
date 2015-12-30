@@ -2,20 +2,23 @@
 
 This directive allows you to add a date-picker to your form elements.
 
-# Requirements
-
-- AngularJS
-- JQuery
-- JQueryUI
-- [Date.toISOString()](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Date/toISOString) (requires [polyfill](https://github.com/kriskowal/es5-shim/) for &le;IE8)
-
 # Alternatives
 
-Please consider using the excellent [ui-bootstrap](https://angular-ui.github.io/bootstrap/) date-picker which is maintained by a larger team.
+We recommend using the excellent [ui-bootstrap](https://angular-ui.github.io/bootstrap/) date-picker which is maintained by a larger team.  
 
-# Usage
+WARNING: Support for this module may eventually be phased out as angular 2.0 arrives as there are no plans to move this to angular 2 at this time.
 
-We use [bower](http://bower.io/) for dependency management.  Install and save to bower.json by running:
+# Requirements
+
+- JQuery
+- JQueryUI
+- AngularJS
+
+# Bower Usage
+
+You may use [bower](http://bower.io/) for dependency management but would recommend using webpack or browserify for modules.
+
+Install and save to bower.json by running:
 
     bower install angular-ui-date --save
 
