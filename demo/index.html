@@ -12,7 +12,7 @@
     <!-- Date -->
     <div ng-controller='MyCtrl'>
     <label for="date">Select Date:</label>
-    <input type="text" id="date" ui-date="dateOptions"ng-model="aDate">
+    <input type="text" id="date" ui-date="dateOptions" ng-model="aDate">
 
     <div>{{ aDate }}</div>
     <a href="#" ng-click="logDate()">log date</a>
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="assets/date.js"></script>
     <script>
       angular.module('ui.date').controller('MyCtrl', function($scope) {
-          $scope.aDate = new Date();
+          $scope.aDate = '2015-10-31';
           $scope.dateOptions = {
-            dateFormat: 'dd-mm-yy'
+            //  dateFormat: 'dd/mm/yy',
           }
           $scope.logDate = function(){
             console.log($scope.aDate);
