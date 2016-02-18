@@ -1,3 +1,13 @@
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/angular-ui/ui-date/compare/1.0.0-beta.3...v1.0.0) (2016-02-18)
+
+
+### Bug Fixes
+
+* **ui-date:** Validator is ok for blank or null dates ([93e6141](https://github.com/angular-ui/ui-date/commit/93e6141))
+
+
+
 <a name="1.0.0-beta.0"></a>
 # [1.0.0-beta.0](https://github.com/angular-ui/ui-date/compare/0.0.11...v1.0.0-beta.0) (2015-12-09)
 
