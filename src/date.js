@@ -11,8 +11,8 @@ export default angular.module('ui.date', [])
       dateToString: dateToString,
     };
 
-    function dateToString(dateFormat, value) {
-      dateFormat = dateFormat || uiDateFormatConfig;
+    function dateToString(uiDateFormat, value) {
+      var dateFormat = uiDateFormat || uiDateFormatConfig;
       if (value) {
         if (dateFormat) {
           try {
@@ -138,8 +138,10 @@ export default angular.module('ui.date', [])
               }
             });
 
-            controller.$validators.uiDateValidator = function uiDateValidator(modelValue, viewValue) {
-              return angular.isDate(uiDateConverter.stringToDate(attrs.uiDateFormat, viewValue));
+            controller.$validators.uiDateValidator = function uiDateValidator(modelValue, viewValue) {              
+              return   viewValue === null
+                    || viewValue === ''
+                    || angular.isDate(uiDateConverter.stringToDate(attrs.uiDateFormat, viewValue));
             };
 
             controller.$parsers.push(function uiDateParser(valueToParse) {

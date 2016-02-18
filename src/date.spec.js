@@ -433,6 +433,29 @@ describe('uiDateFormat', function() {
         expect(element.controller('ngModel').$viewValue).toEqual(null);
       });
     });
+
+    it('should validate null and blank dates as valid', function() {
+      inject(function($compile, $rootScope) {
+
+        var element = $compile('<form name="testForm"><input name="optionalDate" ui-date="{dateFormat: \'yy-mm-dd\'}" ng-required="false" ng-model="x"/></form>')($rootScope);
+        var ngModel = element.find('input').controller('ngModel');
+        ngModel.$setViewValue('');
+
+        expect($rootScope.testForm.$error).toEqual({});
+      })
+    });
+
+    // it('should validate null and blank dates as valid', function() {
+    //   inject(function($compile, $rootScope) {
+    //     $rootScope.x = null;
+    //     var element = $compile('<form name="testForm"><input name="optionalDate" ui-date="{dateFormat: \'yy-mm-dd\'}" ng-required="false" ng-model="x"/></form>')($rootScope);
+    //     expect($rootScope.testForm.$error).toEqual({});
+    //
+    //     element.find('input').val('09-99-99').triggerHandler('input');
+    //     expect($rootScope.testForm.$error).toEqual({});
+    //   })
+    // });
+
   });
 
   describe('$parsing', function() {
