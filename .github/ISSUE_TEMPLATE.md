@@ -1,4 +1,4 @@
-### Please fill in this template
+<!--- Please fill out the template below -->
 
 1. Describe the problem and the steps to reproduce
 2. Describe the expected result
