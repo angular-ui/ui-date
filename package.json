@@ -1,6 +1,6 @@
 {
   "name": "angular-ui-date",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0",
   "description": "This directive allows you to add a date-picker to your form elements.",
   "main": "dist/date.js",
   "scripts": {
