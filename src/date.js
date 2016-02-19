@@ -106,21 +106,22 @@ export default angular.module('ui.date', [])
               scope.$apply(function() {
                 showing = true;
                 setVal();
-                _onSelect(value, picker);
                 $element.blur();
+                _onSelect(value, picker, $element);
               });
             };
 
             var _beforeShow = opts.beforeShow || angular.noop;
             opts.beforeShow = function(input, picker) {
               showing = true;
-              _beforeShow(input, picker);
+              _beforeShow(input, picker, $element);
             };
 
             var _onClose = opts.onClose || angular.noop;
             opts.onClose = function(value, picker) {
               showing = false;
-              _onClose(value, picker);
+              $element.focus();
+              _onClose(value, picker, $element);
             };
 
             element.on('focus', function(focusEvent) {
@@ -138,7 +139,7 @@ export default angular.module('ui.date', [])
               }
             });
 
-            controller.$validators.uiDateValidator = function uiDateValidator(modelValue, viewValue) {              
+            controller.$validators.uiDateValidator = function uiDateValidator(modelValue, viewValue) {
               return   viewValue === null
                     || viewValue === ''
                     || angular.isDate(uiDateConverter.stringToDate(attrs.uiDateFormat, viewValue));

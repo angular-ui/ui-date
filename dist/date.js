@@ -82,8 +82,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    dateToString: dateToString
 	  };
 
-	  function dateToString(dateFormat, value) {
-	    dateFormat = dateFormat || uiDateFormatConfig;
+	  function dateToString(uiDateFormat, value) {
+	    var dateFormat = uiDateFormat || uiDateFormatConfig;
 	    if (value) {
 	      if (dateFormat) {
 	        try {
@@ -138,12 +138,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var showing = false;
 	        var opts = getOptions();
 
-	        function setVal() {
+	        function setVal(forcedUpdate) {
 	          var keys = ['Hours', 'Minutes', 'Seconds', 'Milliseconds'];
 	          var isDate = _angular2.default.isDate(controller.$modelValue);
 	          var preserve = {};
 
-	          if (isDate && controller.$modelValue.toDateString() === $element.datepicker('getDate').toDateString()) {
+	          if (!forcedUpdate && isDate && controller.$modelValue.toDateString() === $element.datepicker('getDate').toDateString()) {
 	            return;
 	          }
 
@@ -173,22 +173,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	            scope.$apply(function () {
 	              showing = true;
 	              setVal();
-	              _onSelect(value, picker);
 	              $element.blur();
+	              _onSelect(value, picker, $element);
 	            });
 	          };
 
 	          var _beforeShow = opts.beforeShow || _angular2.default.noop;
 	          opts.beforeShow = function (input, picker) {
 	            showing = true;
-	            _beforeShow(input, picker);
+	            _beforeShow(input, picker, $element);
 	          };
 
 	          var _onClose = opts.onClose || _angular2.default.noop;
 	          opts.onClose = function (value, picker) {
 	            showing = false;
-	            _onClose(value, picker);
+	            $element.focus();
+	            _onClose(value, picker, $element);
 	          };
+
+	          element.on('focus', function (focusEvent) {
+	            if (attrs.readonly) {
+	              focusEvent.stopImmediatePropagation();
+	            }
+	          });
 
 	          $element.off('blur.datepicker').on('blur.datepicker', function () {
 	            if (!showing) {
@@ -200,7 +207,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          });
 
 	          controller.$validators.uiDateValidator = function uiDateValidator(modelValue, viewValue) {
-	            return _angular2.default.isDate(uiDateConverter.stringToDate(attrs.uiDateFormat, viewValue));
+	            return viewValue === null || viewValue === '' || _angular2.default.isDate(uiDateConverter.stringToDate(attrs.uiDateFormat, viewValue));
 	          };
 
 	          controller.$parsers.push(function uiDateParser(valueToParse) {
@@ -209,6 +216,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	          // Update the date picker when the model changes
 	          controller.$render = function () {
+	            // Force a render to override whatever is in the input text box
+	            if (_angular2.default.isDate(controller.$modelValue) === false && _angular2.default.isString(controller.$modelValue)) {
+	              controller.$modelValue = uiDateConverter.stringToDate(attrs.uiDateFormat, controller.$modelValue);
+	            }
 	            $element.datepicker('setDate', controller.$modelValue);
 	          };
 	        }
@@ -231,8 +242,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 
 	        if (controller) {
-	          // Force a render to override whatever is in the input text box
 	          controller.$render();
+	          // Update the model with the value from the datepicker after parsed
+	          setVal(true);
 	        }
 	      };
 
