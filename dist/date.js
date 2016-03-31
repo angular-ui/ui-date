@@ -173,21 +173,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	            scope.$apply(function () {
 	              showing = true;
 	              setVal();
-	              _onSelect(value, picker);
 	              $element.blur();
+	              _onSelect(value, picker, $element);
 	            });
 	          };
 
 	          var _beforeShow = opts.beforeShow || _angular2.default.noop;
 	          opts.beforeShow = function (input, picker) {
 	            showing = true;
-	            _beforeShow(input, picker);
+	            _beforeShow(input, picker, $element);
 	          };
 
 	          var _onClose = opts.onClose || _angular2.default.noop;
 	          opts.onClose = function (value, picker) {
 	            showing = false;
-	            _onClose(value, picker);
+	            $element.focus();
+	            _onClose(value, picker, $element);
 	          };
 
 	          element.on('focus', function (focusEvent) {

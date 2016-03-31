@@ -322,6 +322,23 @@ describe('uiDate', function() {
       });
     });
 
+    // it('should focus after selecting a date', function() {
+    //   inject(function($compile, $rootScope) {
+    //     var element = $compile(`<div>
+    //         <input id="firstBox"/>
+    //         <input id="focusDate" ui-date/>
+    //         </div>`)($rootScope);
+    //     $rootScope.$apply();
+    //     $(document.body).append(element);
+    //     var datePickerElement = element.find('#focusDate');
+    //     $rootScope.$apply();
+    //     datePickerElement.datepicker('show');
+    //     datePickerElement.datepicker('hide');
+    //     expect($('#focusDate').is(':focus')).toBe(true);
+    //     element.remove();
+    //   });
+    // });
+
   });
   describe('use with ng-required directive', function() {
     it('should be invalid initially', function() {
