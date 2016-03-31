@@ -1,3 +1,9 @@
+<a name="1.0.1"></a>
+## [1.0.1](https://github.com/angular-ui/ui-date/compare/1.0.0...v1.0.1) (2016-03-31)
+
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/angular-ui/ui-date/compare/1.0.0-beta.3...v1.0.0) (2016-02-18)
 
