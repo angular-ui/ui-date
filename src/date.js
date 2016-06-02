@@ -120,7 +120,6 @@ export default angular.module('ui.date', [])
             var _onClose = opts.onClose || angular.noop;
             opts.onClose = function(value, picker) {
               showing = false;
-              $element.focus();
               _onClose(value, picker, $element);
             };
 

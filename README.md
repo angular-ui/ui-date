@@ -112,6 +112,21 @@ Note: Remember that the ng-required directive must be explictly set, i.e. to "tr
 <div ui-date="dateOptions" name="DateOfBirth" ng-required="true"></div>
 ```
 
+## focusing the next element for tabbing
+
+There is a problem with IE that re-opens the datepicker on focus().  However, this breaks tabbing.  If tabbing is more
+important than IE for your use cases, pass in the onClose option.
+
+```javascript
+myAppModule.controller('MyController', function($scope) {
+  $scope.dateOptions = {
+      onClose: (value, picker, $element) => {
+        $element.focus()
+      }
+    };
+});
+```
+
 ## Usage with webpack
 
 Install with npm:
