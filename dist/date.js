@@ -187,7 +187,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	          var _onClose = opts.onClose || _angular2.default.noop;
 	          opts.onClose = function (value, picker) {
 	            showing = false;
-	            $element.focus();
 	            _onClose(value, picker, $element);
 	          };
 
