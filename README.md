@@ -53,17 +53,19 @@ Apply the directive to your form elements:
 
 ## Options
 
-All the jQueryUI DatePicker options can be passed through the directive.
+All the [jQueryUI DatePicker options](http://api.jqueryui.com/datepicker/) can be passed through the directive including minDate, maxDate, yearRange etc.
 
 ```js
 myAppModule.controller('MyController', function($scope) {
   $scope.dateOptions = {
     changeYear: true,
     changeMonth: true,
-    yearRange: '1900:-0'
+    yearRange: '1900:-0',    
     };
 });
 ```
+
+then pass through your options:
 
 ```html
     <input ui-date="dateOptions" name="DateOfBirth">
