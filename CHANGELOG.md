@@ -1,7 +1,13 @@
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/angular-ui/ui-date/compare/1.0.1...v1.1.1) (2016-03-31)
+
+### Bug Fixes
+
+* **ui-date:** Fix for ie10/11 focus issues
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://github.com/angular-ui/ui-date/compare/1.0.0...v1.0.1) (2016-03-31)
-
-
 
 
 <a name="1.0.0"></a>

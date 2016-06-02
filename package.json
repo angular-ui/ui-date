@@ -5,7 +5,7 @@
   "main": "dist/date.js",
   "scripts": {
     "build": "npm run test && webpack",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md --same-file",
     "commit": "git-cz",
     "lint": "eslint src/** --ext .js",
     "update": "bower update",
@@ -39,6 +39,7 @@
     "bower": "^1.7.0",
     "commitizen": "^2.4.6",
     "conventional-changelog": "^1.1.0",
+    "conventional-changelog-cli": "1.2.0",
     "cz-conventional-changelog": "^1.1.5",
     "eslint": "^1.10.3",
     "exports-loader": "0.6.2",
