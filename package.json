@@ -33,12 +33,12 @@
   "devDependencies": {
     "angular": "^1.4.0",
     "angular-mocks": "^1.4.0",
-    "babel-core": "6.3.15",
-    "babel-loader": "6.2.0",
-    "babel-preset-es2015": "6.3.13",
+    "babel-core": "6.9.1",
+    "babel-loader": "6.2.4",
+    "babel-preset-es2015": "6.9.0",
     "bower": "^1.7.0",
     "commitizen": "^2.4.6",
-    "conventional-changelog": "^0.5.1",
+    "conventional-changelog": "^1.1.0",
     "cz-conventional-changelog": "^1.1.5",
     "eslint": "^1.10.3",
     "exports-loader": "0.6.2",
@@ -47,12 +47,12 @@
     "jquery": "2.1.4",
     "jquery-ui": "1.10.5",
     "karma": "^0.13.15",
-    "karma-chrome-launcher": "^0.2.2",
-    "karma-firefox-launcher": "^0.1.7",
-    "karma-jasmine": "^0.3.6",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
     "karma-webpack": "1.7.0",
-    "webpack": "1.12.9",
-    "webpack-dev-server": "1.14.0"
+    "webpack": "1.13.1",
+    "webpack-dev-server": "1.14.1"
   },
   "config": {
     "commitizen": {
