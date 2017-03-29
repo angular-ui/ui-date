@@ -163,6 +163,26 @@ describe('uiDate', function() {
     });
   });
 
+
+  it('should observe timezone option', function() {
+    inject(function($compile, $rootScope) {
+      var zone, expected;
+      $rootScope.x = new Date(2012, 9, 12, 12);
+      zone = $rootScope.x.getTimezoneOffset();
+      if (zone === 0) {
+        zone = '+0400';
+        expected = 8;
+      } else {
+        expected = 12 - zone / 60;
+        zone = 'UTC';
+      }
+      var element = $compile('<input ui-date ng-model-options="{timezone: \'' + zone + '\'}" ng-model="x"/>')($rootScope);
+      $rootScope.$apply();
+      selectDate(element, $rootScope.x);
+      expect($rootScope.x.getHours()).toBe(expected);
+    });
+  });
+
   it('should convert a model string to a Date immediately after applied', function() {
     inject(function($compile, $rootScope) {
       $rootScope.x = '2015-09-13';

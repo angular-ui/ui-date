@@ -82,6 +82,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	    dateToString: dateToString
 	  };
 
+	  //https://github.com/angular/angular.js/blob/622c42169699ec07fc6daaa19fe6d224e5d2f70e/src/Angular.js#L1207
+	  function timezoneToOffset(timezone, fallback) {
+	    timezone = timezone.replace(/:/g, '');
+	    var requestedTimezoneOffset = Date.parse('Jan 01, 1970 00:00:00 ' + timezone) / 60000;
+	    return isNaN(requestedTimezoneOffset) ? fallback : requestedTimezoneOffset;
+	  }
+
+	  function addDateMinutes(date, minutes) {
+	    date = new Date(date.getTime());
+	    date.setMinutes(date.getMinutes() + minutes);
+	    return date;
+	  }
+
+	  function convertTimezoneToLocal(date, timezone, reverse) {
+	    reverse = reverse ? -1 : 1;
+	    var dateTimezoneOffset = date.getTimezoneOffset();
+	    var timezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
+	    return addDateMinutes(date, reverse * (timezoneOffset - dateTimezoneOffset));
+	  }
+
+	  function doTZ(date, timezone, reverse) {
+	    return timezone ? convertTimezoneToLocal(date, timezone, reverse) : date;
+	  }
+
 	  function dateToString(uiDateFormat, value) {
 	    var dateFormat = uiDateFormat || uiDateFormatConfig;
 	    if (value) {
@@ -100,25 +124,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return null;
 	  }
 
-	  function stringToDate(dateFormat, valueToParse) {
+	  function stringToDate(dateFormat, valueToParse, timezone) {
 	    dateFormat = dateFormat || uiDateFormatConfig;
 
 	    if (_angular2.default.isDate(valueToParse) && !isNaN(valueToParse)) {
-	      return valueToParse;
+	      return doTZ(valueToParse, timezone);
 	    }
 
 	    if (_angular2.default.isString(valueToParse)) {
 	      if (dateFormat) {
-	        return _jquery2.default.datepicker.parseDate(dateFormat, valueToParse);
+	        return doTZ(_jquery2.default.datepicker.parseDate(dateFormat, valueToParse), timezone);
 	      }
 
 	      var isoDate = new Date(valueToParse);
-	      return isNaN(isoDate.getTime()) ? null : isoDate;
+	      return isNaN(isoDate.getTime()) ? null : doTZ(isoDate, timezone);
 	    }
 
 	    if (_angular2.default.isNumber(valueToParse)) {
 	      // presumably timestamp to date object
-	      return new Date(valueToParse);
+	      return doTZ(new Date(valueToParse), timezone);
 	    }
 
 	    return null;
@@ -137,6 +161,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var initDateWidget = function initDateWidget() {
 	        var showing = false;
 	        var opts = getOptions();
+	        var timezone = controller ? controller.$options.getOption('timezone') : null;
 
 	        function setVal(forcedUpdate) {
 	          var keys = ['Hours', 'Minutes', 'Seconds', 'Milliseconds'];
@@ -210,14 +235,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	          };
 
 	          controller.$parsers.push(function uiDateParser(valueToParse) {
-	            return uiDateConverter.stringToDate(attrs.uiDateFormat, valueToParse);
+	            return uiDateConverter.stringToDate(attrs.uiDateFormat, valueToParse, timezone);
 	          });
 
 	          // Update the date picker when the model changes
 	          controller.$render = function () {
 	            // Force a render to override whatever is in the input text box
 	            if (_angular2.default.isDate(controller.$modelValue) === false && _angular2.default.isString(controller.$modelValue)) {
-	              controller.$modelValue = uiDateConverter.stringToDate(attrs.uiDateFormat, controller.$modelValue);
+	              controller.$modelValue = uiDateConverter.stringToDate(attrs.uiDateFormat, controller.$modelValue, timezone);
 	            }
 	            $element.datepicker('setDate', controller.$modelValue);
 	          };
